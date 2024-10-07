@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import AuthContext from "./context/authprovider";  
 import axios from './api/axios';
-import './login.css' 
+import './login.css';
 
 const LOGIN_URL = '/auth/generateToken';
 
@@ -10,11 +10,11 @@ const Login = () => {
     const errRef = useRef<HTMLDivElement>(null);
     const authContext = useContext(AuthContext);
 
-    const [user, setUser] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState(''); 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false); 
-    
+
     useEffect(() => {
         if (userRef.current) {
             userRef.current.focus(); 
@@ -23,14 +23,18 @@ const Login = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, password]); 
+    }, [username, password]); 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+        console.log("Enviando JSON:", JSON.stringify({ username, password }));
+
         try {
             const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ username: user, password: password }),
+                JSON.stringify({ 
+                    username, 
+                    password 
+                }),
                 { 
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -39,11 +43,17 @@ const Login = () => {
 
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            if (authContext) {
-                authContext.setAuth({ isLoggedIn: true, user: { username: user, roles } });
+            if (accessToken) {
+                localStorage.setItem("accessToken", accessToken); 
             }
-            setUser('');
+            if (authContext) {
+                authContext.setAuth({ 
+                    isLoggedIn: true, 
+                    user: { username,roles: ["USER_ROLE"] } 
+                });
+            }
+
+            setUsername('');
             setPassword('');
             setSuccess(true);
             
@@ -76,14 +86,14 @@ const Login = () => {
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Inicia sesión</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Nombre De Usuario:</label>
+                        <label htmlFor="username">Usuario o Correo Electronico:</label>
                         <input
                             type="text"
                             id="username"
                             ref={userRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setUsername(e.target.value)}
+                            value={username}
                             required
                         />
                         <label htmlFor="password">Contraseña:</label>

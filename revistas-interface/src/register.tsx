@@ -69,7 +69,7 @@ const Registro = () => {
                     name: usuario,
                     email: correo,
                     password: contrasena,
-                    roles: "ROLE_USER"
+                    roles: ["ROLE_USER"]
                 }),
                 {
                     headers: { 'Content-Type': 'application/json' },

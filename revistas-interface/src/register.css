@@ -8,7 +8,7 @@
 
 html {
     font-family: 'Nunito', sans-serif;
-    font-size: 18px; /* Disminuir el tamaño de la fuente */
+    font-size: 18px; 
     color: #FFFFFF;
 }
 
@@ -33,7 +33,7 @@ body {
 section {
     width: 100%;
     max-width: 420px;
-    min-height: 350px; /* Reducir la altura mínima */
+    min-height: 350px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -68,12 +68,12 @@ input[type="password"],
 button,
 textarea {
     font-family: 'Nunito', sans-serif;
-    font-size: 18px; /* Disminuir el tamaño de la fuente */
-    padding: 0.75rem; /* Ajustar el padding */
+    font-size: 18px; 
+    padding: 0.75rem;
     border-radius: 0.5rem;
     border: 1px solid #FFFFFF;
     margin-top: 1rem;
-    width: 100%; /* Asegurar que el ancho sea 100% */
+    width: 100%; 
     color: #000000;
 }
 

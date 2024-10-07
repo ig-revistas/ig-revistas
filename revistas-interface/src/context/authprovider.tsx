@@ -2,8 +2,7 @@ import React, { createContext, useState, ReactNode } from "react";
 
 interface User {
     username: string;
-    roles: string[];
-    // Puedes agregar más propiedades según tus necesidades
+    roles: string[]; 
 }
 
 interface AuthContextType {
