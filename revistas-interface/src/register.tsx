@@ -1,14 +1,15 @@
 import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './register.css'
+import './register.css';
 import axios from './api/axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface RegisterResponse {
     accessToken: string;
 }
 
+// Regex patterns for validation
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const EMAIL_REGEX = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
@@ -17,6 +18,7 @@ const REGISTER_URL = '/auth/Registrarse';
 const Registro = () => {
     const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLParagraphElement>(null);
+    const navigate = useNavigate(); // Usar useNavigate para redirigir
 
     const [usuario, setUsuario] = useState<string>('');
     const [validNombre, setValidNombre] = useState<boolean>(false);
@@ -54,7 +56,7 @@ const Registro = () => {
     useEffect(() => {
         setErrMsg('');
     }, [usuario, correo, contrasena, confirmarContrasena]);
-    
+
     const manejarEnvio = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const v1 = USER_REGEX.test(usuario);
@@ -77,12 +79,10 @@ const Registro = () => {
                 }
             );
             console.log(response.data);
-            console.log(response.data.accessToken); 
+            console.log(response.data.accessToken);
             setExito(true);
-            setUsuario('');
-            setCorreo('');
-            setContrasena('');
-            setConfirmarContrasena('');
+            // Redirigir al formulario de registro de revistas
+            navigate('/registro-revistas');
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Sin respuesta del servidor');
@@ -94,7 +94,6 @@ const Registro = () => {
             errRef.current?.focus();
         }
     };
-    
 
     return (
         <>
@@ -189,19 +188,17 @@ const Registro = () => {
                             value={confirmarContrasena}
                             required
                             aria-invalid={validConfirmar ? "false" : "true"}
-                            aria-describedby="confirmnote"
                             onFocus={() => setConfirmarFocus(true)}
                             onBlur={() => setConfirmarFocus(false)}
                         />
-                        <p id="confirmnote" className={confirmarFocus && !validConfirmar ? "instructions" : "offscreen"}>
+                        <p className={confirmarFocus && !validConfirmar ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            Debe coincidir con el primer campo de contraseña.
+                            Las contraseñas deben coincidir.
                         </p>
-
-                        <button disabled={!validNombre || !validCorreo || !validContrasena || !validConfirmar}>Registrarse</button>
+                        <button disabled={!validNombre || !validCorreo || !validContrasena || !validConfirmar ? true : false}>Registrar</button>
                     </form>
                     <p>
-                        ¿Ya estás registrado?<br />
+                        ¿Ya tienes una cuenta? <br />
                         <span className="line">
                             <Link to="/login">Iniciar Sesión</Link>
                         </span>
@@ -209,7 +206,7 @@ const Registro = () => {
                 </section>
             )}
         </>
-    )
-}
+    );
+};
 
 export default Registro;
