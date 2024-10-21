@@ -1,39 +1,61 @@
 import React, { useState } from 'react';
-import FechaEntrega from './components/entrega-devolucion/fechas/fecha-entrega';
-import FechaDevolucion from './components/entrega-devolucion/fechas/fecha-devolucion';
 
-const RegistroFechas = () => {
-    const [revista, setRevista] = useState<string>('');  // Maneja el título o nombre de la revista
-    const [exito, setExito] = useState<boolean>(false);   // Estado para indicar si el registro fue exitoso
+const RegistroFechas: React.FC = () => {
+  const [idRevista, setIdRevista] = useState<string>('');
 
-    const manejarEnvio = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        // Lógica para manejar el envío del formulario de revistas
-        setExito(true); // Simulación de éxito
-    };
+  const registrarEntrega = async () => {
+    try {
+      const response = await fetch(`/prestamos/entregar/${idRevista}`, {
+        method: 'POST',
+      });
+      if (response.ok) {
+        alert('Fecha de entrega registrada correctamente.');
+      } else {
+        alert('Error al registrar la fecha de entrega.');
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
 
-    return (
-        <section>
-            {exito ? (
-                <h1>¡Registro de Revista Exitoso!</h1>
-            ) : (
-                <form onSubmit={manejarEnvio}>
-                    <label>
-                        Revista:
-                        <input 
-                            type="text" 
-                            value={revista} 
-                            onChange={(e) => setRevista(e.target.value)} 
-                            required 
-                        />
-                    </label>
-                    <FechaEntrega />
-                    <FechaDevolucion />
-                    <button type="submit">Registrar Entrega y Devolución</button>
-                </form>
-            )}
-        </section>
-    );
+  const registrarDevolucion = async () => {
+    try {
+      const response = await fetch(`/prestamos/devolver/${idRevista}`, {
+        method: 'POST',
+      });
+      if (response.ok) {
+        alert('Fecha de devolución registrada correctamente.');
+      } else {
+        alert('Error al registrar la fecha de devolución.');
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Registro de Fechas de Entrega y Devolución</h2>
+
+      <div>
+        <label htmlFor="idRevista">ID de la Revista:</label>
+        <input
+          type="text"
+          id="idRevista"
+          value={idRevista}
+          onChange={(e) => setIdRevista(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <button onClick={registrarEntrega}>Registrar Fecha de Entrega</button>
+      </div>
+
+      <div>
+        <button onClick={registrarDevolucion}>Registrar Fecha de Devolución</button>
+      </div>
+    </div>
+  );
 };
 
 export default RegistroFechas;

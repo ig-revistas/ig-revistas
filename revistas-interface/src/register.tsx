@@ -82,7 +82,7 @@ const Registro = () => {
             console.log(response.data.accessToken);
             setExito(true);
             // Redirigir al formulario de registro de revistas
-            navigate('/registro-revistas');
+            navigate('/registro-fechas');
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Sin respuesta del servidor');
@@ -195,7 +195,9 @@ const Registro = () => {
                             <FontAwesomeIcon icon={faInfoCircle} />
                             Las contraseñas deben coincidir.
                         </p>
-                        <button disabled={!validNombre || !validCorreo || !validContrasena || !validConfirmar ? true : false}>Registrar</button>
+                        <button disabled={!validNombre || !validCorreo || !validContrasena || !validConfirmar}>
+                            Registrar
+                        </button>
                     </form>
                     <p>
                         ¿Ya tienes una cuenta? <br />
