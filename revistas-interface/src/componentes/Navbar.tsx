@@ -18,11 +18,11 @@ const Navbar: React.FC = () => {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
-                
+                {isAdmin() &&(    
                     <li>
                         <Link to='/new_revista'>Nueva Revista</Link>
                     </li>
-                 
+                )}    
             </ul>
            
             <ul >
