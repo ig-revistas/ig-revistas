@@ -1,8 +1,10 @@
 import React, { createContext, useState, ReactNode } from "react";
 
 interface User {
-    username: string;
+    name: string;
     roles: string[]; 
+    email: string;
+    token: string;
 }
 
 interface AuthContextType {
@@ -24,5 +26,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         </AuthContext.Provider>
     );
 };
+
 
 export default AuthContext;
