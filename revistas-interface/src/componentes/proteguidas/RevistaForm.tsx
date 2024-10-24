@@ -11,12 +11,16 @@ const RevistaForm: React.FC=()=>{
         setEditorial,
         categoria,
         setCategoria,
+        autor,
+        setAutor,
         ejemplares,
         setEjemplares,
         fechaDePublicacion,
         setFechaDePublicacion,
         descripcion,
         setDescripcion,
+        estado,
+        setEstado,
         manejarEnvio,
     }=useRevistaNew();
 
@@ -35,6 +39,9 @@ const RevistaForm: React.FC=()=>{
         if(!categoria){
             nuevosErrores.push('Debe de seleccionar una categoria.')
         }
+        if(autor.length ===0){
+            nuevosErrores.push('El campo autor es obligatorio')
+        }
         if(ejemplares<1){
             nuevosErrores.push('Debe de haber 1 o mas ejemplares')
         }
@@ -52,7 +59,7 @@ const RevistaForm: React.FC=()=>{
         if (validacionForm()) {
             try {
                 await manejarEnvio(e);
-                console.log('Datos enviados:', { titulo, editorial, categoria, ejemplares, fechaDePublicacion, descripcion });
+                console.log('Datos enviados:', { titulo, editorial, categoria, autor, ejemplares, fechaDePublicacion, descripcion, estado });
                 resetFormulario();
             } catch (error) {
                 console.error('Error al enviar los datos:', error);
@@ -67,6 +74,8 @@ const RevistaForm: React.FC=()=>{
         setEjemplares(1);
         setFechaDePublicacion('');
         setDescripcion('');
+        setAutor(''),
+        
         setErrores([]);
     };
 
@@ -111,6 +120,15 @@ const RevistaForm: React.FC=()=>{
                         <option key={cat} value={cat}>{cat}</option>
                     ))}
                 </select>
+            </label>
+            <label>
+                Autor:
+                <input 
+                    type="text"
+                    value={autor}
+                    onChange={(e)=> setAutor(e.target.value)}
+                    required
+                    />
             </label>
             <label>
                 Ejemplares Disponibles:

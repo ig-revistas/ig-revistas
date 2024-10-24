@@ -6,10 +6,10 @@ import AuthContext from "../context/authprovider";
 const Navbar: React.FC = () => {
     const authContext = useContext(AuthContext);
     
-    
+    // esto hay que cambiarlo
     const isAdmin=()=>{
         const rol=authContext?.auth.user?.roles;
-        return rol?.includes('ROL_ADMIN')
+        return rol?.includes('ADMIN_ROLE')
     }
 
     return (
@@ -18,6 +18,8 @@ const Navbar: React.FC = () => {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
+                
+                {/* esto hay que cambiarlo*/}
                 {isAdmin() &&(    
                     <li>
                         <Link to='/new_revista'>Nueva Revista</Link>

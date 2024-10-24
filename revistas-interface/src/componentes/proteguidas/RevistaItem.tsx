@@ -5,8 +5,9 @@ export interface Revista {
     titulo: string;
     editorial?: string;
     categoria: string;
+    autor: string;
     ejemplares: number;
-    fechaDePublicacion?: string;
+    fechaPublicacion?: string;
     descripcion?: string;
 }
 export type RevistaItemProps={
@@ -19,8 +20,9 @@ const RevistaItem: React.FC<RevistaItemProps> = ({ revista }) => {
             <h3>{revista.titulo}</h3>
             {revista.editorial && <p>Editorial: {revista.editorial}</p>}
             <p>Categoría: {revista.categoria}</p>
+            <p>Autor: {revista.autor}</p>
             <p>Ejemplares Disponibles: {revista.ejemplares}</p>
-            {revista.fechaDePublicacion && <p>Fecha de Publicación: {revista.fechaDePublicacion}</p>}
+            {revista.fechaPublicacion && <p>Fecha de Publicación: {revista.fechaPublicacion}</p>}
             {revista.descripcion && <p>Descripción: {revista.descripcion}</p>}
         </div>
     );
