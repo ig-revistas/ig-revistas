@@ -1,4 +1,5 @@
 import React,{ useState }  from "react";
+import '../../css/RevistaForm.css';
 import useRevistaNew from "../../hooks/useRevistaNew";
 
 

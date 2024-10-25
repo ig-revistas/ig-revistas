@@ -1,4 +1,5 @@
 import useLogin from '../hooks/useLogin';
+import { Link } from 'react-router-dom';
 import '../css/Login.css';
 
 const Login = () => {
@@ -50,6 +51,12 @@ const Login = () => {
                         
                         <button>Iniciar</button>
                     </form>
+                    <p>
+                        ¿Todavia No Estar Registrado??<br />
+                        <span className="line">
+                            <Link to="/registro">Registrarse En La Pagina</Link>
+                        </span>
+                    </p>
                 </section>
             )}
         </>

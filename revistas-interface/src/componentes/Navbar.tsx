@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
            
             <ul >
                 <li>
-                    <Link className='registro' to="/registro">Registro</Link>
+                    <Link className='registro' to="/Login">Iniciar Sesion</Link>
                 </li>
             </ul>
             

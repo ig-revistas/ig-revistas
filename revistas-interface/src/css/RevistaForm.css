@@ -1,0 +1,87 @@
+.revista-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #3c3c3c;;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: #ecf0f1;
+    font-family: 'Arial', sans-serif;
+}
+
+.revista-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.revista-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #ecf0f1;
+}
+
+.revista-form input[type="text"],
+.revista-form input[type="number"],
+.revista-form input[type="date"],
+.revista-form textarea,
+.revista-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color:  #ecf0f1;
+    color: #ecf0f1;
+    font-size: 1rem;
+}
+
+.revista-form input::placeholder,
+.revista-form textarea::placeholder {
+    color: #95a5a6;
+}
+
+.revista-form textarea {
+    resize: none;
+    height: 100px;
+}
+
+.revista-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.revista-form button:hover {
+    background-color: #c0392b;
+}
+
+.revista-form button[type="button"] {
+    background-color: #95a5a6;
+    margin-top: 10px;
+}
+
+.revista-form button[type="button"]:hover {
+    background-color: #7f8c8d;
+}
+
+.errores {
+    background-color: #e74c3c;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+.error {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
