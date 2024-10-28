@@ -1,64 +1,47 @@
 import { useState } from "react";
 import axios from '../api/axios';
 
-
 const REGISTER_URL = '/auth/CrearRevista';
-// esto hay que cambiarlo
-enum Estado{
+
+export enum Estado {
     DISPONIBLE = 'DISPONIBLE',
     PRESTADA = 'PRESTADA',
-    RESERVADA= 'RESERVADA', 
-    DEVUELTA='DEVUELTA'
-}
-interface RevistaResponse {
-    id: number;
-    message: string;
+    RESERVADA = 'RESERVADA',
+    DEVUELTA = 'DEVUELTA'
 }
 
 const useRevistaNew = () => {
     const [titulo, setTitulo] = useState<string>('');
     const [editorial, setEditorial] = useState<string>('');
     const [categoria, setCategoria] = useState<string>('');
+    const [autor, setAutor] = useState<string>('');
     const [ejemplares, setEjemplares] = useState<number>(1);
     const [fechaDePublicacion, setFechaDePublicacion] = useState<string>('');
     const [descripcion, setDescripcion] = useState<string>('');
-    const [estado, setEstado] = useState<Estado>()
-
+    const [estado, setEstado] = useState<Estado>(Estado.DISPONIBLE);
     const [errMsg, setErrMsg] = useState<string>('');
-    const [autor, setAutor]= useState<string>('');
-    
 
-    const manejarEnvio = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const headers = {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+    };
+
+    const manejarEnvio = async (formData: FormData) => {
         try {
-            const response = await axios.post<RevistaResponse>(REGISTER_URL, 
-                JSON.stringify({
-                    titulo: titulo,
-                    editorial: editorial,
-                    categoria: categoria,
-                    autor: autor,
-                    ejemplares: ejemplares,
-                    fechaDePublicacion: fechaDePublicacion,
-                    descripcion: descripcion,
-                    estado:Estado.DISPONIBLE,
-                }), 
-                {
+            setErrMsg('');
+            const response = await axios.post(
+                REGISTER_URL,
+                formData,
+                { 
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem("accessToken")}` 
-                    },
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': headers.Authorization
+                    }
                 }
             );
-
-            console.log("Revista creada:", response.data); 
-            
-        } catch (error: any) {
-            if (!error?.response) {
-                setErrMsg('Sin respuesta del servidor');
-            } else {
-                setErrMsg('Error al crear la revista');
-                console.error("Error detallado:", error.response.data); 
-            }
+            return response.data; 
+        } catch (error) {
+            console.error("Error al enviar los datos:", error); 
+            setErrMsg("Ocurrió un error al enviar los datos. Intente nuevamente."); 
         }
     };
 

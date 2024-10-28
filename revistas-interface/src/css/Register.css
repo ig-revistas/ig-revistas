@@ -1,196 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: 'Nunito', sans-serif;
-    font-size: 62.5%; 
-    color: #FFFFFF;
-}
-
-body {
-    min-height: 100vh;
-    background-color: #3c3c3c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-}
-
-.App {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; 
-    padding: 1rem 0.5rem;
-}
-
-section {
-    width: 100%;
-    max-width: 420px;
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 2rem;
-    background-color: #3c3c3c;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-h1 {
-    color: #FFFFFF;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
+@import './variables.css';
 
 form {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    padding-bottom: 1rem;
-}
-
-a, a:visited {
-    color: #FFFFFF;
-    text-decoration: none;
+    gap: 1rem;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
-button,
 textarea {
-    font-family: 'Nunito', sans-serif;
-    font-size: 18px; 
+    font-family: var(--font-family);
+    font-size: 1.6rem;
     padding: 0.75rem;
     border-radius: 0.5rem;
-    border: 1px solid #FFFFFF;
-    margin-top: 1rem;
-    width: 100%; 
-    color: #ffffff;
+    border: 1px solid var(--text-color-white);
+    color: var(--text-color-black);
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-textarea:focus {
+input:focus, textarea:focus {
     outline: none;
-    border-color: #FFFFFF;
-    box-shadow: 0 0 5px #da0000;
-}
-
-label,
-button {
-    margin-top: 1rem;
-    color: #FFFFFF;
-}
-
-button {
-    padding: 0.75rem;
-    background-color: #92D5E6;
-    color: black;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #EFC3F5;
-}
-
-.instructions {
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    background: #000000;
-    color: #FF0000;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
-}
-
-.offscreen {
-    position: absolute;
-    left: -9999px;
-}
-
-.hide {
-    display: none;
-}
-
-.valid {
-    color: #00FF00;
-    margin-left: 0.25rem;
-}
-
-.invalid {
-    color: #FF0000;
-    margin-left: 0.25rem;
-}
-
-.errmsg {
-    background-color: lightpink;
-    color: firebrick;
-    font-weight: bold;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 0.5rem;
-}
-
-.line {
-    display: inline-block;
-}
-
-header {
-    position: absolute;
-    bottom: 30%;
-    padding: 0 50px;
-}
-
-header h1 {
-    color: #FFFFFF;
-    font-size: 6rem;
-}
-
-header h2 {
-    color: #FFFFFF;
-    font-size: 3rem;
-}
-
-header p {
-    color: #FFFFFF;
-    padding: 10px 7px;
-    font-size: 2.1rem;
-}
-
-ul li {
-    background-color: #3c3c3c;
-    color: white;
-    display: inline-block;
-    list-style: none;  
-    padding: 5px 35px;
-    font-weight: 700;
-    font-size: 1.4rem;
-    transition: all 0.5s ease 0s;  
-    cursor: pointer;
-}
-
-ul li:hover {
-    border-radius: 20px;
-    background-color: #FFFFFF;
-    color: #000000;
-}
-
-nav {
-    width: 400%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 700px;
+    border-color: var(--text-color-white);
+    box-shadow: 0 0 5px var(--text-color-white);
 }

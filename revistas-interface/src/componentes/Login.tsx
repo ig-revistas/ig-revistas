@@ -16,7 +16,7 @@ const Login = () => {
     } = useLogin();
     
     return (
-        <>
+        <div className="login-wrapper">
             { success ? (
                 <section>
                     <h1>Se inició sesión!</h1>
@@ -52,14 +52,14 @@ const Login = () => {
                         <button>Iniciar</button>
                     </form>
                     <p>
-                        ¿Todavia No Estar Registrado??<br />
+                        ¿Todavia No Estas Registrado?<br />
                         <span className="line">
-                            <Link to="/registro">Registrarse En La Pagina</Link>
+                            <Link to="/registro">Registrarse En La Pagin</Link>
                         </span>
                     </p>
                 </section>
             )}
-        </>
+        </div>
     );
 };
 

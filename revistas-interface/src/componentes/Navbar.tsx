@@ -6,11 +6,10 @@ import AuthContext from "../context/authprovider";
 const Navbar: React.FC = () => {
     const authContext = useContext(AuthContext);
     
-    // esto hay que cambiarlo
-    const isAdmin=()=>{
-        const rol=authContext?.auth.user?.roles;
-        return rol?.includes('ADMIN_ROLE')
-    }
+    const isAdmin = () => {
+        const rol = authContext?.auth.user?.roles;
+        return rol?.includes('ADMIN_ROLE');
+    };
 
     return (
         <nav className="navbar">
@@ -19,21 +18,18 @@ const Navbar: React.FC = () => {
                     <Link to="/">Home</Link>
                 </li>
                 
-                {/* esto hay que cambiarlo*/}
-                {isAdmin() &&(    
+                {isAdmin() && (
                     <li>
                         <Link to='/new_revista'>Nueva Revista</Link>
                     </li>
-                )}    
+                )}
             </ul>
            
-            <ul >
+            <ul>
                 <li>
                     <Link className='registro' to="/Login">Iniciar Sesion</Link>
                 </li>
             </ul>
-            
-                
         </nav>
     );
 }

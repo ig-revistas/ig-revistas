@@ -1,10 +1,11 @@
-import React,{ useState }  from "react";
-import '../../css/RevistaForm.css';
+import React, { useState } from "react";
 import useRevistaNew from "../../hooks/useRevistaNew";
+import { Estado } from "../../hooks/useRevistaNew";
+import '../../css/RevistaForm.css';
 
+const CATEGORIAS = ['Ciencia', 'Tecnología', 'Arte', 'Historia', 'Entretenimiento', 'Deporte'];
 
-
-const RevistaForm: React.FC=()=>{
+const RevistaForm: React.FC = () => {
     const {
         titulo,
         setTitulo,
@@ -23,48 +24,58 @@ const RevistaForm: React.FC=()=>{
         estado,
         setEstado,
         manejarEnvio,
-    }=useRevistaNew();
+        errMsg,
+    } = useRevistaNew();
 
-    const [errores, setErrores]= useState<String[]>([]);
-    const categorias=['Cinecia','Tecnología','Arte','Historia','Entretenimiento'];
+    const [portada, setPortada] = useState<File | null>(null);
+    const [errores, setErrores] = useState<string[]>([]);
+    const [loading, setLoading] = useState(false);
 
-    const validacionForm=()=>{
-        const nuevosErrores: string[]=[];
-        
-        if(titulo.length<3){
-            nuevosErrores.push('El titulo debe de tener mas de 3 caracteres.')
+    const validarFormulario = () => {
+        const nuevosErrores: string[] = [];
+        if (titulo.trim().length < 3) nuevosErrores.push('El título debe tener más de 3 caracteres.');
+        if (editorial.length > 50) nuevosErrores.push('La editorial no puede contener más de 50 caracteres.');
+        if (!categoria) nuevosErrores.push('Debe seleccionar una categoría.');
+        if (!autor.trim()) nuevosErrores.push('El campo autor es obligatorio.');
+        if (ejemplares < 1) nuevosErrores.push('Debe haber 1 o más ejemplares.');
+        if (fechaDePublicacion && new Date(fechaDePublicacion) > new Date()) {
+            nuevosErrores.push('La fecha de publicación debe ser anterior o igual a la actual.');
         }
-        if(editorial.length>50){
-            nuevosErrores.push('La editorial no pude contener mas de 50 caracteres')
-        }
-        if(!categoria){
-            nuevosErrores.push('Debe de seleccionar una categoria.')
-        }
-        if(autor.length ===0){
-            nuevosErrores.push('El campo autor es obligatorio')
-        }
-        if(ejemplares<1){
-            nuevosErrores.push('Debe de haber 1 o mas ejemplares')
-        }
-        if(fechaDePublicacion && new Date(fechaDePublicacion) > new Date){
-            nuevosErrores.push('La fecha de publicacion debe ser anterior o igual a la actual')
-        }
-        if(descripcion.length>200){
-            nuevosErrores.push('La descripcion no puede contener mas de 200 caracteres.')
-        }
+        if (descripcion.length > 200) nuevosErrores.push('La descripción no puede contener más de 200 caracteres.');
+        if (!portada) nuevosErrores.push('Debe subir una portada para la revista.');
+
         setErrores(nuevosErrores);
-        return nuevosErrores.length ===0;
-    }
+        return nuevosErrores.length === 0;
+    };
+
     const enviarFormulario = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (validacionForm()) {
-            try {
-                await manejarEnvio(e);
-                console.log('Datos enviados:', { titulo, editorial, categoria, autor, ejemplares, fechaDePublicacion, descripcion, estado });
-                resetFormulario();
-            } catch (error) {
-                console.error('Error al enviar los datos:', error);
-            }
+        if (!validarFormulario()) return;
+        setLoading(true);
+    
+        try {
+            const formData = new FormData();
+            formData.append(
+                'revista',
+                new Blob([JSON.stringify({
+                    autor,
+                    titulo,
+                    categoria,
+                    descripcion,
+                    editorial,
+                    estado,
+                    cantidad_disponible: ejemplares,
+                    fecha_publicacion: fechaDePublicacion,
+                })], { type: 'application/json' }) // Asegúrate de que el tipo sea JSON
+            );
+            if (portada) formData.append('portada', portada);
+    
+            await manejarEnvio(formData);
+            resetFormulario();
+        } catch (error) {
+            console.error('Error al enviar los datos:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -72,17 +83,19 @@ const RevistaForm: React.FC=()=>{
         setTitulo('');
         setEditorial('');
         setCategoria('');
+        setAutor('');
         setEjemplares(1);
         setFechaDePublicacion('');
         setDescripcion('');
-        setAutor(''),
-        
+        setEstado(Estado.DISPONIBLE);
+        setPortada(null);
         setErrores([]);
     };
 
     return (
-        <form onSubmit={enviarFormulario} className="revista-form">
+        <form onSubmit={enviarFormulario} className="revista-form" aria-live="polite">
             <h2>Crear Nueva Revista</h2>
+
             {errores.length > 0 && (
                 <div className="errores">
                     {errores.map((error, index) => (
@@ -90,6 +103,9 @@ const RevistaForm: React.FC=()=>{
                     ))}
                 </div>
             )}
+
+            {errMsg && <p className="error" aria-live="assertive">{errMsg}</p>}
+
             <label>
                 Título:
                 <input
@@ -100,6 +116,7 @@ const RevistaForm: React.FC=()=>{
                     placeholder="Mínimo 3 caracteres"
                 />
             </label>
+
             <label>
                 Editorial:
                 <input
@@ -109,6 +126,7 @@ const RevistaForm: React.FC=()=>{
                     placeholder="Hasta 50 caracteres"
                 />
             </label>
+
             <label>
                 Categoría:
                 <select
@@ -117,20 +135,22 @@ const RevistaForm: React.FC=()=>{
                     required
                 >
                     <option value="">Seleccionar...</option>
-                    {categorias.map((cat) => (
+                    {CATEGORIAS.map((cat) => (
                         <option key={cat} value={cat}>{cat}</option>
                     ))}
                 </select>
             </label>
+
             <label>
                 Autor:
                 <input 
                     type="text"
                     value={autor}
-                    onChange={(e)=> setAutor(e.target.value)}
+                    onChange={(e) => setAutor(e.target.value)}
                     required
-                    />
+                />
             </label>
+
             <label>
                 Ejemplares Disponibles:
                 <input
@@ -141,6 +161,7 @@ const RevistaForm: React.FC=()=>{
                     required
                 />
             </label>
+
             <label>
                 Fecha de Publicación:
                 <input
@@ -149,6 +170,7 @@ const RevistaForm: React.FC=()=>{
                     onChange={(e) => setFechaDePublicacion(e.target.value)}
                 />
             </label>
+
             <label>
                 Descripción:
                 <textarea
@@ -158,7 +180,19 @@ const RevistaForm: React.FC=()=>{
                     placeholder="Máximo 200 caracteres"
                 />
             </label>
-            <button type="submit">Crear Revista</button>
+
+            <label>
+                Portada:
+                <input
+                    type="file"
+                    onChange={(e) => e.target.files && setPortada(e.target.files[0])}
+                    accept="image/*"
+                />
+            </label>
+
+            <button type="submit" disabled={loading}>
+                {loading ? 'Enviando...' : 'Crear Revista'}
+            </button>
             <button type="button" onClick={resetFormulario}>Cancelar</button>
         </form>
     );
