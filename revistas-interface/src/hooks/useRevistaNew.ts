@@ -1,43 +1,39 @@
 import { useState } from "react";
-import axios from '../api/axios';
+import apiRevista from '../api/apiRevista';
+import {tipoRevista, Estado} from "../modelo/tipoRevista";
 
-const REGISTER_URL = '/auth/CrearRevista';
+const REGISTER_URL = '/revistas';
 
-export enum Estado {
-    DISPONIBLE = 'DISPONIBLE',
-    PRESTADA = 'PRESTADA',
-    RESERVADA = 'RESERVADA',
-    DEVUELTA = 'DEVUELTA'
-}
+
+const initialRevista: tipoRevista = {
+    id: 0,
+    titulo: '',
+    autor: '',
+    categoria: '',
+    editorial: '',
+    descripcion: '',
+    portadaUrl: '',
+    estado: Estado.DISPONIBLE,
+    fechaDePublicacion: '',
+    ejemplares: 0
+};
+
 
 const useRevistaNew = () => {
-    const [titulo, setTitulo] = useState<string>('');
-    const [editorial, setEditorial] = useState<string>('');
-    const [categoria, setCategoria] = useState<string>('');
-    const [autor, setAutor] = useState<string>('');
-    const [ejemplares, setEjemplares] = useState<number>(1);
-    const [fechaDePublicacion, setFechaDePublicacion] = useState<string>('');
-    const [descripcion, setDescripcion] = useState<string>('');
-    const [estado, setEstado] = useState<Estado>(Estado.DISPONIBLE);
+    const [revista, setRevista] = useState<tipoRevista>(initialRevista);
+    
     const [errMsg, setErrMsg] = useState<string>('');
-
-    const headers = {
-        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
-    };
+    const [exito, setExito] = useState<boolean>(false);
+    
 
     const manejarEnvio = async (formData: FormData) => {
         try {
             setErrMsg('');
-            const response = await axios.post(
+            const response = await apiRevista.post(
                 REGISTER_URL,
-                formData,
-                { 
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': headers.Authorization
-                    }
-                }
+                formData
             );
+            setExito(true);
             return response.data; 
         } catch (error) {
             console.error("Error al enviar los datos:", error); 
@@ -46,24 +42,11 @@ const useRevistaNew = () => {
     };
 
     return {
-        titulo,
-        setTitulo,
-        editorial,
-        setEditorial,
-        categoria,
-        setCategoria,
-        autor,
-        setAutor,
-        ejemplares,
-        setEjemplares,
-        fechaDePublicacion,
-        setFechaDePublicacion,
-        descripcion,
-        setDescripcion,
-        estado,
-        setEstado,
+        revista,
+        setRevista,
         manejarEnvio,
         errMsg,
+        exito,
     };
 };
 

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { useRegistro } from "../hooks/useRegister";  
-import '../css/Register.css';
+import './css/Register.css';
 
 const Registro = () => {
     const {

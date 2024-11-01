@@ -1,4 +1,4 @@
-@import './variables.css';
+@import '../componentes/css/Variables.css';
 
 .App {
     display: flex;

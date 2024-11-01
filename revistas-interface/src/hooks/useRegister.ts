@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import axios from '../api/axios';
+import apiRevista from '../api/apiRevista';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const EMAIL_REGEX = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-const REGISTER_URL = '/auth/Registrarse';
+
+const REGISTER_URL = '/registrarse';
 
 interface RegisterResponse {
     accessToken: string;
@@ -60,17 +61,13 @@ export const useRegistro = () => {
             return;
         }
         try {
-            const response = await axios.post<RegisterResponse>(REGISTER_URL,
+            const response = await apiRevista.post<RegisterResponse>(REGISTER_URL,
                 JSON.stringify({
                     name: usuario,
                     email: correo,
                     password: contrasena,
                     roles: ["ROLE_USER"]
-                }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
+                })
             )
             setExito(true);
             setUsuario('');

@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../context/authprovider';
+import { Navigate } from 'react-router-dom';
 
 
 interface PrivateRouteProps {
@@ -37,7 +38,10 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({children:children,  rol }) =
             {hasAccess() ? (
                 children  
             ) : (
-                <div>No tienes acceso a esta página.</div>  
+             /*
+              TODO : HAcer mensaje de avido "no tenes permiso, logiate."
+              */
+              <Navigate to="/login" />
             )}
         </>
     );

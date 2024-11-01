@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import AuthContext from "../context/authprovider";
-import axios from '../api/axios';
+import apiRevista from '../api/apiRevista';
 
-const LOGIN_URL = '/auth/generateToken';
+const LOGIN_URL = '/generate-token';
 
 const useLogin = () => {
     const userRef = useRef<HTMLInputElement>(null); 
@@ -28,7 +28,7 @@ const useLogin = () => {
         e.preventDefault();
         console.log("Enviando JSON:", JSON.stringify({ username, password })); 
         try {
-            const response = await axios.post(LOGIN_URL,
+            const response = await apiRevista.post(LOGIN_URL,
                 JSON.stringify({ username, password }),
                 { 
                     headers: { 'Content-Type': 'application/json' },

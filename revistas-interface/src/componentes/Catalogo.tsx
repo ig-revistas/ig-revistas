@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Revista, { Revista as RevistaType } from './Revista'; 
-import '../css/Catalogo.css'; 
+import apiRevista from '../api/apiRevista';
+import Revista from './Revista';
+import { tipoRevista } from '../modelo/tipoRevista'; 
+import './css/Catalogo.css'; 
 
 const Catalogo: React.FC = () => {
-    const [revistas, setRevistas] = useState<RevistaType[]>([]);
+    const [revistas, setRevistas] = useState<tipoRevista[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const obtenerRevistas = async () => {
             try {
-                const response = await axios.get<RevistaType[]>('http://localhost:8080/auth/revistas', {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}` 
-                    }
-                });
+                const response = await apiRevista.get<tipoRevista[]>('/revistas');
                 setRevistas(response.data);
             } catch (err: any) {
                 setError('Error al obtener las revistas');
