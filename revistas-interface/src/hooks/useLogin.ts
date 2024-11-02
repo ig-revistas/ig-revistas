@@ -1,8 +1,18 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import AuthContext from "../context/authprovider";
 import apiRevista from '../api/apiRevista';
+import AuthContext from "../context/authprovider";
 
-const LOGIN_URL = '/generate-token';
+const LOGIN_URL = '/login';
+
+// TODO
+interface LoginResponse {
+    token: string;
+    usuario: {
+        name: string;
+        roles: string[];
+        email: string;
+    };
+}
 
 const useLogin = () => {
     const userRef = useRef<HTMLInputElement>(null); 
@@ -28,7 +38,7 @@ const useLogin = () => {
         e.preventDefault();
         console.log("Enviando JSON:", JSON.stringify({ username, password })); 
         try {
-            const response = await apiRevista.post(LOGIN_URL,
+            const response = await apiRevista.post<LoginResponse>(LOGIN_URL,
                 JSON.stringify({ username, password }),
                 { 
                     headers: { 'Content-Type': 'application/json' },
@@ -36,34 +46,25 @@ const useLogin = () => {
                 }
             );
 
-            console.log(JSON.stringify(response?.data));
+            console.log(JSON.stringify(response.data));
 
-            const token = response?.data.token
-            const userData = response?.data.usuario; 
+            const token = response.data.token;
+            const userData = response.data.usuario; 
             
             if (token) {
                 localStorage.setItem("accessToken", token); 
             }
-            {/* 
-            console.log("Datos del usuario:", {
-                name: userData?.name,
-                roles: userData?.roles,
-                email: userData?.email,
-                token: token
-            });
-            */}
+
             if (authContext) {
                 authContext.setAuth({
                     isLoggedIn: true,
                     user: { 
-                        name: userData?.name,  
-                        roles: userData?.roles, 
-                        email: userData?.email,
+                        name: userData.name,  
+                        roles: userData.roles, 
+                        email: userData.email,
                         token: token 
                     }
-                    
                 });
-                
             }
 
             setUsername(''); 

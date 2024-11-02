@@ -1,6 +1,6 @@
 import { useState } from "react";
 import apiRevista from '../api/apiRevista';
-import {tipoRevista, Estado} from "../modelo/tipoRevista";
+import {Revista as tipoRevista, Estado} from "../tipos/Revista";
 
 const REGISTER_URL = '/revistas';
 
@@ -15,7 +15,7 @@ const initialRevista: tipoRevista = {
     portadaUrl: '',
     estado: Estado.DISPONIBLE,
     fechaDePublicacion: '',
-    ejemplares: 0
+    ejemplares: 1
 };
 
 

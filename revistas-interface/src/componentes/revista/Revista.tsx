@@ -1,6 +1,6 @@
 import React from 'react';
-import './css/Revista.css';
-import {tipoRevista} from '../modelo/tipoRevista';
+import './Revista.css';
+import {Revista as tipoRevista} from '../../tipos/Revista';
 
 
 interface RevistaProps {

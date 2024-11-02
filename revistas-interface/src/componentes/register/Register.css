@@ -1,4 +1,4 @@
-@import './Variables.css';
+@import '../../css/Variables.css';
 
 form {
     display: flex;

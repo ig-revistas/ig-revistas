@@ -1,14 +1,14 @@
 import { useContext } from 'react';
-import AuthContext from '../context/authprovider';
+import AuthContext from '../../context/authprovider';
 import { Navigate } from 'react-router-dom';
 
 
-interface PrivateRouteProps {
+interface RutaPrivadaProps {
     children: React.ReactNode;
     rol: string;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({children:children,  rol }) => {
+const RutaPrivada: React.FC<RutaPrivadaProps> = ({children:children,  rol }) => {
     
     const authContext = useContext(AuthContext);
     
@@ -47,4 +47,4 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({children:children,  rol }) =
     );
 };
 
-export default PrivateRoute;
+export default RutaPrivada;

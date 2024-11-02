@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import apiRevista from '../api/apiRevista';
-import Revista from './Revista';
-import { tipoRevista } from '../modelo/tipoRevista'; 
-import './css/Catalogo.css'; 
+import apiRevista from '../../api/apiRevista';
+import Revista from '../revista/Revista';
+import { Revista as tipoRevista } from '../../tipos/Revista'; 
+import './Catalogo.css'; 
 
 const Catalogo: React.FC = () => {
     const [revistas, setRevistas] = useState<tipoRevista[]>([]);

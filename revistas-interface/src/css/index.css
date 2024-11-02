@@ -1,4 +1,4 @@
-@import '../componentes/css/Variables.css';
+@import './Variables.css';
 
 * {
     margin: 0;

@@ -1,0 +1,222 @@
+import React, { useState } from "react";
+import useRevistaNew from "../../hooks/useRevistaNew";
+import { Estado, Revista } from "../../tipos/Revista";
+import Swal from 'sweetalert2';
+import { Navigate } from "react-router-dom";
+import './RevistaForm.css';
+
+const CATEGORIAS = ['Ciencia', 'Tecnología', 'Arte', 'Historia', 'Entretenimiento', 'Deporte'];
+
+const RevistaForm: React.FC = () => {
+    const { revista, setRevista, manejarEnvio, errMsg, exito } = useRevistaNew();
+
+    const [portada, setPortada] = useState<File | null>(null);
+    const [errores, setErrores] = useState<{ [key: string]: string }>({});
+
+    const [loading, setLoading] = useState(false);
+
+    if (exito) {
+        return <Navigate to="/" />;
+    }
+
+    const validarFormulario = () => {
+        const nuevosErrores: { [key: string]: string } = {};
+        if (revista?.titulo.trim().length < 3) nuevosErrores.titulo='El título debe tener más de 3 caracteres.';
+        if (revista?.editorial.length > 50) nuevosErrores.editorial='La editorial no puede contener más de 50 caracteres.';
+        if (!revista?.categoria) nuevosErrores.categoria='Debe seleccionar una categoría.';
+        if (!revista?.autor.trim()) nuevosErrores.autor='El campo autor es obligatorio.';
+        if (revista?.ejemplares < 1) nuevosErrores.ejemplares='Debe haber 1 o más ejemplares.';
+        if (revista?.fechaDePublicacion && new Date(revista?.fechaDePublicacion) > new Date()) {
+            nuevosErrores.fechaDePublicacion='La fecha de publicación debe ser anterior o igual a la actual.';
+        }
+        if (revista?.descripcion.length > 200) nuevosErrores.descripcion='La descripción no puede contener más de 200 caracteres.';
+        if (!portada) nuevosErrores.portada='Debe subir una portada para la revista.';
+        console.log("Errores:", nuevosErrores);
+        setErrores(nuevosErrores);
+        return Object.keys(nuevosErrores).length === 0;
+    };
+
+    const enviarFormulario = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!validarFormulario()) return;
+        setLoading(true);
+
+        try {
+            const formData = new FormData();
+            const revistaData = {
+                autor: revista.autor,
+                titulo: revista.titulo,
+                categoria: revista.categoria,
+                descripcion: revista.descripcion,
+                editorial: revista.editorial,
+                estado: revista.estado,
+                cantidad_disponible: revista.ejemplares,
+                fecha_publicacion: revista.fechaDePublicacion,
+            };
+
+            formData.append('revista', new Blob([JSON.stringify(revistaData)], { type: 'application/json' }));
+            if (portada) formData.append('portada', portada);
+
+            await manejarEnvio(formData);
+            resetFormulario(true);
+        } catch (error) {
+            console.error('Error al enviar los datos:', error);
+            Swal.fire("Error", "Error al crear la revista. Por favor, inténtelo de nuevo.", "error");
+            resetFormulario(false);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const resetFormulario = (exito: boolean) => {
+        const formularioVacio: Revista = {
+            id: 0,
+            titulo: '',
+            autor: '',
+            categoria: '',
+            editorial: '',
+            descripcion: '',
+            portadaUrl: '',
+            estado: Estado.DISPONIBLE,
+            fechaDePublicacion: '',
+            ejemplares: 1
+        }
+        if (exito) {
+            Swal.fire("Éxito", "Revista creada exitosamente.", "success");
+            setRevista(formularioVacio);
+            setPortada(null);
+            setErrores({});
+        } else {
+            if (revista.titulo || revista.autor || revista.editorial || revista.categoria || revista.descripcion || portada) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Perderás todos los datos ingresados",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, cancelar',
+                    cancelButtonText: 'No, continuar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        setRevista(formularioVacio);
+                        setPortada(null);
+                        setErrores({});
+                    }
+                });
+            } else {
+                setRevista(formularioVacio);
+                setPortada(null);
+                setErrores({});
+            }
+        }
+    };
+
+    return (
+        <div>
+            <form onSubmit={enviarFormulario} className="revista-form" aria-live="polite">
+                <h2>Crear Nueva Revista</h2>
+
+               
+                {errMsg && <p className="error" aria-live="assertive">{errMsg}</p>}
+
+                <label>
+                    Título:
+                    <input
+                        type="text"
+                        value={revista?.titulo || ''}
+                        onChange={(e) => setRevista({ ...revista, titulo: e.target.value })}
+                        required
+                        placeholder="Mínimo 3 caracteres"
+                    />
+                    {errores.titulo && <p className="error-mensaje">{errores.titulo}</p>}
+                </label>
+
+                <label>
+                    Editorial:
+                    <input
+                        type="text"
+                        value={revista?.editorial || ''}
+                        onChange={(e) => setRevista({ ...revista, editorial: e.target.value })}
+                        placeholder="Hasta 50 caracteres"
+                    />
+                    {errores.editorial && <p className="error-mensaje">{errores.editorial}</p>}
+                </label>
+
+                <label>
+                    Categoría:
+                    <select
+                        value={revista?.categoria || ''}
+                        onChange={(e) => setRevista({ ...revista, categoria: e.target.value })}
+                        required
+                    >
+                        <option value="">Seleccionar...</option>
+                        {CATEGORIAS.map((cat) => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+                    {errores.categoria && <p className="error-mensaje">{errores.categoria}</p>}
+                </label>
+
+                <label>
+                    Autor:
+                    <input
+                        type="text"
+                        value={revista?.autor || ''}
+                        onChange={(e) => setRevista({ ...revista, autor: e.target.value })}
+                        required
+                    />
+                    {errores.autor && <p className="error-mensaje">{errores.autor}</p>}
+                </label>
+
+                <label>
+                    Ejemplares Disponibles:
+                    <input
+                        type="number"
+                        value={revista?.ejemplares || 1}
+                        onChange={(e) => setRevista({ ...revista, ejemplares: parseInt(e.target.value) })}
+                        min="1"
+                        required
+                    />
+                    {errores.ejemplares && <p className="error-mensaje">{errores.ejemplares}</p>}
+                </label>
+
+                <label>
+                    Fecha de Publicación:
+                    <input
+                        type="date"
+                        value={revista?.fechaDePublicacion || ''}
+                        onChange={(e) => setRevista({ ...revista, fechaDePublicacion: e.target.value })}
+                    />
+                    {errores.fechaDePublicacion && <p className="error-mensaje">{errores.fechaDePublicacion}</p>}
+                </label>
+
+                <label>
+                    Descripción:
+                    <textarea
+                        value={revista?.descripcion || ''}
+                        onChange={(e) => setRevista({ ...revista, descripcion: e.target.value })}
+                        maxLength={200}
+                        placeholder="Máximo 200 caracteres"
+                    />
+                    {errores.descripcion && <p className="error-mensaje">{errores.descripcion}</p>}
+                </label>
+
+                <label>
+                    Portada:
+                    <input
+                        type="file"
+                        onChange={(e) => e.target.files && setPortada(e.target.files[0])}
+                        accept="image/*"
+                    />
+                    {errores.portada && <p className="error-mensaje">{errores.portada}</p>}
+                </label>
+
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Enviando...' : 'Crear Revista'}
+                </button>
+                <button type="button" onClick={() => resetFormulario(false)}>Cancelar</button>
+            </form>
+        </div>
+    );
+};
+
+export default RevistaForm;

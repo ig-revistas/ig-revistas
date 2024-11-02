@@ -1,4 +1,4 @@
-export interface tipoRevista {
+export interface Revista {
     id: number;
     titulo: string;
     autor: string;
