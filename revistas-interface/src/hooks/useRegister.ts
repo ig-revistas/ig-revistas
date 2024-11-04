@@ -64,11 +64,15 @@ export const useRegistro = () => {
             const response = await apiRevista.post<RegisterResponse>(REGISTER_URL,
                 JSON.stringify({
                     name: usuario,
-                    email: correo,
                     password: contrasena,
-                    roles: ["ROLE_USER"]
-                })
+                    email: correo
+                }),
+                { 
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
             )
+            
             setExito(true);
             setUsuario('');
             setCorreo('');

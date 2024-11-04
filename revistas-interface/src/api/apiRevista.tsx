@@ -9,7 +9,7 @@ apiRevista.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem('accessToken');
     
     
-    if (accessToken && config.headers && !(config.url?.includes('/login') || 
+    if (accessToken && config.headers && !(config.url?.includes('/login') ||
                                            config.url?.includes('/home') || 
                                            config.url?.includes('/registrarse'))) {
         config.headers.Authorization = `Bearer ${accessToken}`;
