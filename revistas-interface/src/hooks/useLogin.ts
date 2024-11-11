@@ -4,74 +4,74 @@ import AuthContext from "../context/authprovider";
 
 const LOGIN_URL = '/login';
 
-// TODO
 interface LoginResponse {
     token: string;
     usuario: {
         name: string;
         roles: string[];
         email: string;
+        portadaUrl?: string;
     };
 }
 
 const useLogin = () => {
-    const userRef = useRef<HTMLInputElement>(null); 
+    const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLDivElement>(null);
     const authContext = useContext(AuthContext);
 
-    const [username, setUsername] = useState(''); 
-    const [password, setPassword] = useState(''); 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false); 
-
+    const [loading, setLoading] = useState(false); 
     useEffect(() => {
         if (userRef.current) {
-            userRef.current.focus(); 
+            userRef.current.focus();
         }
     }, []);
 
     useEffect(() => {
-        setErrMsg(''); 
-    }, [username, password]); 
-   
+        setErrMsg('');
+    }, [username, password]);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Enviando JSON:", JSON.stringify({ username, password })); 
+        setLoading(true);  
+
         try {
             const response = await apiRevista.post<LoginResponse>(LOGIN_URL,
                 JSON.stringify({ username, password }),
-                { 
+                {
                     headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+                    withCredentials: true,
                 }
             );
 
-            console.log(JSON.stringify(response.data));
-
             const token = response.data.token;
-            const userData = response.data.usuario; 
-            
+            const userData = response.data.usuario;
+
             if (token) {
-                localStorage.setItem("accessToken", token); 
+                localStorage.setItem("accessToken", token);
             }
 
             if (authContext) {
                 authContext.setAuth({
                     isLoggedIn: true,
-                    user: { 
-                        name: userData.name,  
-                        roles: userData.roles, 
+                    user: {
+                        name: userData.name,
+                        roles: userData.roles,
                         email: userData.email,
-                        token: token 
-                    }
+                        token: token,
+                        portadaUrl: userData.portadaUrl,
+                    },
                 });
             }
 
-            setUsername(''); 
+            setUsername('');
             setPassword('');
-            setSuccess(true);
-
+            setLoading(false);  
         } catch (err: any) {
+            setLoading(false);  
+
             if (!err?.response) {
                 setErrMsg('El servidor no responde');
             } else if (err.response?.status === 400) {
@@ -81,6 +81,7 @@ const useLogin = () => {
             } else {
                 setErrMsg('Falló al iniciar sesión');
             }
+
             errRef.current?.focus();
         }
     };
@@ -88,10 +89,10 @@ const useLogin = () => {
     return {
         userRef,
         errRef,
-        username, 
+        username,
         password,
         errMsg,
-        success,
+        loading,  
         setUsername,
         setPassword,
         handleSubmit,

@@ -10,8 +10,10 @@ apiRevista.interceptors.request.use((config) => {
     
     
     if (accessToken && config.headers && !(config.url?.includes('/login') ||
-                                           config.url?.includes('/home') || 
-                                           config.url?.includes('/registrarse'))) {
+                                           !config.url?.includes('/home') || 
+                                           !config.url?.includes('/uploads') ||
+                                           !config.url?.includes('/revistas/uplods') ||
+                                           !config.url?.includes('/registrarse'))) {
         config.headers.Authorization = `Bearer ${accessToken}`;
     }
     

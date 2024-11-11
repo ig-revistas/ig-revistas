@@ -1,0 +1,67 @@
+@import '../../css/Variables.css';
+
+.detalleRevista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #3c3c3c;
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3), 
+                -8px -8px 15px rgba(255, 255, 255, 0.2);
+    transition: box-shadow 0.3s ease;
+    max-width: 400px;
+    margin: 2rem auto; 
+}
+
+.detalleRevista:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), 
+                -5px -5px 10px rgba(255, 255, 255, 0.3);
+}
+
+.detalleRevista h2 {
+    font-size: 3em;
+    color: var(--text-color-white);
+    margin-bottom: 0.5rem;
+}
+
+.detalleRevista h4 {
+    font-size: 1.5rem;
+    color: var(--text-color-white);
+    margin: 0.5rem 0 1rem;
+}
+
+.detalleRevista img {
+    max-width: 90%; 
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), 
+                -5px -5px 10px rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.detalleRevista p {
+    color: var(--text-color-white);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.detalleRevista button {
+    background-color: #92D5E6;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 
+                -5px -5px 10px rgba(255, 255, 255, 0.2);
+}
+
+.detalleRevista button:hover {
+    background-color: #EFC3F5; 
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 
+                -3px -3px 5px rgba(255, 255, 255, 0.2);
+}

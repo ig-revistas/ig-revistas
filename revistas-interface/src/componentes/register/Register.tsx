@@ -26,7 +26,7 @@ const Registro = () => {
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Registro</h1>
-                    <form onSubmit={manejarEnvio}>
+                    <form onSubmit={manejarEnvio} className="register-form">
                         <label htmlFor="usuario">
                             Usuario:
                             <FontAwesomeIcon icon={faCheck} className={validNombre ? "valid" : "hide"} />
@@ -44,7 +44,7 @@ const Registro = () => {
                             onFocus={() => setUsuarioFocus(true)}
                             onBlur={() => setUsuarioFocus(false)}
                         />
-                        <p id="uidnote" className={usuarioFocus && usuario && !validNombre ? "instructions" : "offscreen"}>
+                        <p id="uidnote" className={usuarioFocus && usuario && !validNombre ? "instructions" : "offscreen"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             4 a 24 caracteres.<br />
                             Debe comenzar con una letra.<br />
@@ -66,7 +66,7 @@ const Registro = () => {
                             onFocus={() => setCorreoFocus(true)}
                             onBlur={() => setCorreoFocus(false)}
                         />
-                        <p className={correoFocus && !validCorreo ? "instructions" : "offscreen"}>
+                        <p className={correoFocus && !validCorreo ? "instructions" : "offscreen"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             Debe ser un correo electrónico válido.
                         </p>
@@ -87,7 +87,7 @@ const Registro = () => {
                             onFocus={() => setContrasenaFocus(true)}
                             onBlur={() => setContrasenaFocus(false)}
                         />
-                        <p id="pwdnote" className={contrasenaFocus && !validContrasena ? "instructions" : "offscreen"}>
+                        <p id="pwdnote" className={contrasenaFocus && !validContrasena ? "instructions" : "offscreen"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             8 a 24 caracteres.<br />
                             Debe incluir letras mayúsculas y minúsculas y un número.<br />
@@ -109,7 +109,7 @@ const Registro = () => {
                             onFocus={() => setConfirmarFocus(true)}
                             onBlur={() => setConfirmarFocus(false)}
                         />
-                        <p id="confirmnote" className={confirmarFocus && !validConfirmar ? "instructions" : "offscreen"}>
+                        <p id="confirmnote" className={confirmarFocus && !validConfirmar ? "instructions" : "offscreen"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             Debe coincidir con el primer campo de contraseña.
                         </p>
@@ -123,7 +123,6 @@ const Registro = () => {
                         </span>
                     </p>
                 </section>
-                
             )}
         </>
     );

@@ -60,3 +60,68 @@
 .navbar .registro {
     margin-left: auto; 
 }
+
+.menu-container {
+    position: absolute;
+    top: 60px; 
+    right: 20px; 
+    z-index: 9999;
+}
+
+.card {
+    width: 200px;
+    background-color: rgba(36, 40, 50, 1);
+    background-image: linear-gradient(
+        139deg,
+        rgba(36, 40, 50, 1) 0%,
+        rgba(36, 40, 50, 1) 0%,
+        rgba(37, 28, 40, 1) 100%
+    );
+    border-radius: 10px;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card .separator {
+    border-top: 1.5px solid #42434a;
+}
+
+.card .list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0px 10px;
+}
+
+.card .list .element {
+    display: flex;
+    align-items: center;
+    color: #7e8590;
+    gap: 10px;
+    transition: all 0.3s ease-out;
+    padding: 4px 7px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.card .list .element:hover {
+    background-color: #5353ff;
+    color: #ffffff;
+    transform: translate(1px, -1px);
+}
+
+.card .list .element.settings {
+    color: #bd89ff;
+}
+
+.card .list .element.logout {
+    color: #bd89ff;
+}
+
+.card .list:last-child .element {
+    color: #bd89ff;
+}

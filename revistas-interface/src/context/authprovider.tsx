@@ -2,14 +2,16 @@ import React, { createContext, useState, ReactNode } from "react";
 
 interface User {
     name: string;
-    roles: string[]; 
+    roles: string[];
     email: string;
     token: string;
+    portadaUrl?: string;
 }
 
 interface AuthContextType {
     auth: { isLoggedIn: boolean; user: User | null };
     setAuth: React.Dispatch<React.SetStateAction<{ isLoggedIn: boolean; user: User | null }>>;
+    cerrarSesion: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -20,12 +22,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         user: null,
     });
 
+    const cerrarSesion = () => {
+        setAuth({ isLoggedIn: false, user: null });
+        localStorage.removeItem('accessToken');
+    };
+
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ auth, setAuth, cerrarSesion }}>
             {children}
         </AuthContext.Provider>
     );
 };
-
 
 export default AuthContext;
