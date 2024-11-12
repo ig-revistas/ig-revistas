@@ -24,13 +24,13 @@ const Registro = () => {
                 </section>
             ) : (
                 <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <p ref={errRef} className={errMsg ? "mensaje-error" : "fuera-de-pantalla"} aria-live="assertive">{errMsg}</p>
                     <h1>Registro</h1>
-                    <form onSubmit={manejarEnvio} className="register-form">
+                    <form onSubmit={manejarEnvio} className="formulario-registro">
                         <label htmlFor="usuario">
                             Usuario:
-                            <FontAwesomeIcon icon={faCheck} className={validNombre ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validNombre || !usuario ? "hide" : "invalid"} />
+                            <FontAwesomeIcon icon={faCheck} className={validNombre ? "valido" : "oculto"} />
+                            <FontAwesomeIcon icon={faTimes} className={validNombre || !usuario ? "oculto" : "invalido"} />
                         </label>
                         <input
                             type="text"
@@ -44,7 +44,7 @@ const Registro = () => {
                             onFocus={() => setUsuarioFocus(true)}
                             onBlur={() => setUsuarioFocus(false)}
                         />
-                        <p id="uidnote" className={usuarioFocus && usuario && !validNombre ? "instructions" : "offscreen"} >
+                        <p id="uidnote" className={usuarioFocus && usuario && !validNombre ? "instrucciones" : "fuera-de-pantalla"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             4 a 24 caracteres.<br />
                             Debe comenzar con una letra.<br />
@@ -53,8 +53,8 @@ const Registro = () => {
 
                         <label htmlFor="correo">
                             Correo:
-                            <FontAwesomeIcon icon={faCheck} className={validCorreo ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validCorreo || !correo ? "hide" : "invalid"} />
+                            <FontAwesomeIcon icon={faCheck} className={validCorreo ? "valido" : "oculto"} />
+                            <FontAwesomeIcon icon={faTimes} className={validCorreo || !correo ? "oculto" : "invalido"} />
                         </label>
                         <input
                             type="email"
@@ -66,15 +66,15 @@ const Registro = () => {
                             onFocus={() => setCorreoFocus(true)}
                             onBlur={() => setCorreoFocus(false)}
                         />
-                        <p className={correoFocus && !validCorreo ? "instructions" : "offscreen"} >
+                        <p className={correoFocus && !validCorreo ? "instrucciones" : "fuera-de-pantalla"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             Debe ser un correo electrónico válido.
                         </p>
 
                         <label htmlFor="contrasena">
                             Contraseña:
-                            <FontAwesomeIcon icon={faCheck} className={validContrasena ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validContrasena || !contrasena ? "hide" : "invalid"} />
+                            <FontAwesomeIcon icon={faCheck} className={validContrasena ? "valido" : "oculto"} />
+                            <FontAwesomeIcon icon={faTimes} className={validContrasena || !contrasena ? "oculto" : "invalido"} />
                         </label>
                         <input
                             type="password"
@@ -87,7 +87,7 @@ const Registro = () => {
                             onFocus={() => setContrasenaFocus(true)}
                             onBlur={() => setContrasenaFocus(false)}
                         />
-                        <p id="pwdnote" className={contrasenaFocus && !validContrasena ? "instructions" : "offscreen"} >
+                        <p id="pwdnote" className={contrasenaFocus && !validContrasena ? "instrucciones" : "fuera-de-pantalla"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             8 a 24 caracteres.<br />
                             Debe incluir letras mayúsculas y minúsculas y un número.<br />
@@ -95,8 +95,8 @@ const Registro = () => {
 
                         <label htmlFor="confirmar_contrasena">
                             Confirmar Contraseña:
-                            <FontAwesomeIcon icon={faCheck} className={validConfirmar && confirmarContrasena ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validConfirmar || !confirmarContrasena ? "hide" : "invalid"} />
+                            <FontAwesomeIcon icon={faCheck} className={validConfirmar && confirmarContrasena ? "valido" : "oculto"} />
+                            <FontAwesomeIcon icon={faTimes} className={validConfirmar || !confirmarContrasena ? "oculto" : "invalido"} />
                         </label>
                         <input
                             type="password"
@@ -109,19 +109,17 @@ const Registro = () => {
                             onFocus={() => setConfirmarFocus(true)}
                             onBlur={() => setConfirmarFocus(false)}
                         />
-                        <p id="confirmnote" className={confirmarFocus && !validConfirmar ? "instructions" : "offscreen"} >
+                        <p id="confirmnote" className={confirmarFocus && !validConfirmar ? "instrucciones" : "fuera-de-pantalla"} >
                             <FontAwesomeIcon icon={faInfoCircle} />
                             Debe coincidir con el primer campo de contraseña.
                         </p>
 
                         <button disabled={!validNombre || !validCorreo || !validContrasena || !validConfirmar}>Registrarse</button>
+
+                        <p className="ya-registrado">
+                            ¿Ya estás registrado? <Link to="/login" className="enlace-iniciar-sesion">Iniciar Sesión</Link>
+                        </p>
                     </form>
-                    <p>
-                        ¿Ya estás registrado?<br />
-                        <span className="line">
-                            <Link to="/login">Iniciar Sesión</Link>
-                        </span>
-                    </p>
                 </section>
             )}
         </>

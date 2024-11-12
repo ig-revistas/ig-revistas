@@ -1,25 +1,92 @@
-/* form.register-form {
+.formulario-registro {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 30px;
+    padding: 1.5em 6em;
+    background-color: #171717;
+    border-radius: 25px;
+    transition: 0.4s ease-in-out;
+    color: #ffffff;
+    font-size: 1.8rem;
 }
 
-form.register-form input[type="text"],
-form.register-form input[type="email"],
-form.register-form input[type="password"],
-form.register-form textarea {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--text-color-white);
-    color: var(--text-color-white);
-    background-color: black;
+.formulario-registro:hover {
+    transform: scale(1.05);
+    border: 1px solid black;
 }
 
-form.register-form input:focus,
-form.register-form textarea:focus {
+.formulario-registro input[type="text"],
+.formulario-registro input[type="email"],
+.formulario-registro input[type="password"],
+.formulario-registro textarea {
+    padding: 1em;
+    border-radius: 25px;
+    border: none;
     outline: none;
-    border-color: var(--text-color-white);
-    box-shadow: 0 0 5px var(--text-color-white);
-} */
+    font-size: 1.8rem;
+    color: #ffffff;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.formulario-registro input:focus,
+.formulario-registro textarea:focus {
+    outline: none;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.formulario-registro .boton {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5em;
+}
+
+.formulario-registro button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.mensaje-error {
+    color: red;
+    font-size: 1.2rem;
+}
+
+.valido {
+    color: #28a745;
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.invalido {
+    color: #dc3545;
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.instrucciones {
+    font-size: 1.2rem;
+    color: #f8f9fa;
+    background-color: #333;
+    padding: 0.5em;
+    border-radius: 0.25rem;
+    margin-top: 0.5em;
+}
+
+.fuera-de-pantalla {
+    position: absolute;
+    left: -9999px;
+}
+
+.ya-registrado {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #f8f9fa;
+    margin-top: 2em;
+}
+
+.enlace-iniciar-sesion {
+    color: #4da6ff;
+    text-decoration: none;
+    font-weight: bold;
+}

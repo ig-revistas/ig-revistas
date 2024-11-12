@@ -70,23 +70,36 @@
     box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
 }
 
-button[type="submit"],
-button[type="button"] {
+revista-button[type="submit"],
+revista-button[type="button"] {
     width: 100%;
     padding: 12px;
     margin-top: 15px;
     border: none;
     border-radius: 20px;
     color: #ffffff;
-    background-color: #3c3c3c;
+    background-color: #4b4b4b;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.revista-form button[type="submit"],
+.revista-form button[type="button"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: #4b4b4b; 
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover,
-button[type="button"]:hover {
-    background-color: #4b4b4b;
+.revista-form button[type="submit"]:hover,
+.revista-form button[type="button"]:hover {
+    background-color: #3a3a3a;
 }
 
 .error-mensaje {
