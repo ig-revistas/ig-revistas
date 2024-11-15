@@ -14,6 +14,7 @@ apiRevista.interceptors.request.use((config) => {
                                            !config.url?.includes('/uploads') ||
                                            !config.url?.includes('/revistas/uplods') ||
                                            !config.url?.includes('/registrarse'))) {
+     if(!(config.url?.includes('/revistas') && config.method=='get'))
         config.headers.Authorization = `Bearer ${accessToken}`;
     }
     
