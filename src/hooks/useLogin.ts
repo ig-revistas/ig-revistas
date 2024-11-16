@@ -23,6 +23,7 @@ const useLogin = () => {
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [loading, setLoading] = useState(false); 
+    const[isAuthenticated, setIsAuthenticated]= useState(false);
     useEffect(() => {
         if (userRef.current) {
             userRef.current.focus();
@@ -69,6 +70,7 @@ const useLogin = () => {
             setUsername('');
             setPassword('');
             setLoading(false);  
+            setIsAuthenticated(true);
         } catch (err: any) {
             setLoading(false);  
 
@@ -85,14 +87,16 @@ const useLogin = () => {
             errRef.current?.focus();
         }
     };
-
+    
     return {
         userRef,
         errRef,
         username,
         password,
         errMsg,
-        loading,  
+        loading,
+        isAuthenticated,
+        setIsAuthenticated,  
         setUsername,
         setPassword,
         handleSubmit,

@@ -10,7 +10,7 @@ interface DetalleRevistaProps {
 const DetalleRevista: React.FC<DetalleRevistaProps> = ({ revistas }) => {
     const { id } = useParams<{ id: string }>();
     const revista = revistas.find((r) => r.id.toString() === id); 
-
+    // te dejo el endpoint que se necesitas aca http://localhost:8080/reserva/reservar, hay que pasarle la revista entera
     if (!revista) {
         return <p>No se encontró la revista.</p>; 
     }

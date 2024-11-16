@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import React from 'react';
+import { useEffect } from 'react';
 import './Login.css';
 import useLogin from '../../hooks/useLogin';
 
@@ -10,7 +10,8 @@ const Login = () => {
         username, 
         password, 
         errMsg, 
-        loading, 
+        loading,
+        isAuthenticated,
         setUsername, 
         setPassword, 
         handleSubmit 
@@ -18,19 +19,19 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-   
-    React.useEffect(() => {
-        if (username && password) {
-            if (!loading && !errMsg) {
-                navigate('/home');  
+    
+        useEffect(() => {
+            if(isAuthenticated){
+                navigate('/');
+                
             }
-        }
-    }, [loading, errMsg, navigate]);
-
+        }, [isAuthenticated, navigate]);
+    
     return (
         <div className="login-container">
             {loading ? (  
                 <p>Cargando...</p>
+                
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
