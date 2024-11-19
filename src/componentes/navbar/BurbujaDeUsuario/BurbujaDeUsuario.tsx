@@ -12,7 +12,7 @@ const BurbujaDeUsuario: React.FC = () => {
     return (
         <div className="burbuja-usuario">
             <img 
-            src={user?.portadaUrl ? `http://localhost:8080${user.portadaUrl}` : "/default-avatar.png"} 
+            src={user?.portadaUrl ? `http://localhost:8080${user.portadaUrl}` : "/default.png"} 
             alt="Avatar" 
             className="avatar" 
             />

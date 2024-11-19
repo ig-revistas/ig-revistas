@@ -1,5 +1,5 @@
 export interface Revista {
-    id: number;
+    id: string;
     titulo: string;
     autor: string;
     categoria: string;

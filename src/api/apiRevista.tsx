@@ -7,14 +7,18 @@ const apiRevista = axios.create({
 
 apiRevista.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem('accessToken');
-    
-    
-    if (accessToken && config.headers &&  (!config.url?.includes('/login') ||
-                                           !config.url?.includes('/home') || 
-                                           !config.url?.includes('/uploads') ||
-                                           !config.url?.includes('/revistas/uplods') ||
-                                           !config.url?.includes('/registrarse'))) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
+    const urlsAbiertas = [
+        '/login',
+        '/home',
+        '/uploads',
+        '/revistas/uploads',
+        '/registrarse'
+    ];
+    if (accessToken && config.headers) {
+        if (!urlsAbiertas.some(url => config.url?.includes(url)) && 
+            !(config.url?.includes('/revistas') && config.method === 'get')) {
+            config.headers.Authorization = `Bearer ${accessToken}`;
+        }
     }
     
     return config;

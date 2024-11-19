@@ -7,6 +7,7 @@ const LOGIN_URL = '/login';
 interface LoginResponse {
     token: string;
     usuario: {
+        id: string;  
         name: string;
         roles: string[];
         email: string;
@@ -22,7 +23,8 @@ const useLogin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         if (userRef.current) {
             userRef.current.focus();
@@ -30,12 +32,12 @@ const useLogin = () => {
     }, []);
 
     useEffect(() => {
-        setErrMsg('');
+        setErrMsg('');  
     }, [username, password]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true);  
+        setLoading(true); 
 
         try {
             const response = await apiRevista.post<LoginResponse>(LOGIN_URL,
@@ -57,6 +59,7 @@ const useLogin = () => {
                 authContext.setAuth({
                     isLoggedIn: true,
                     user: {
+                        id: userData.id,  
                         name: userData.name,
                         roles: userData.roles,
                         email: userData.email,
@@ -69,8 +72,9 @@ const useLogin = () => {
             setUsername('');
             setPassword('');
             setLoading(false);  
+
         } catch (err: any) {
-            setLoading(false);  
+            setLoading(false); 
 
             if (!err?.response) {
                 setErrMsg('El servidor no responde');

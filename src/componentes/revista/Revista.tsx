@@ -7,6 +7,7 @@ interface RevistaProps {
     revista: tipoRevista;
 }
 
+
 const Revista: React.FC<RevistaProps> = ({ revista }) => {
     return (
         <Link to={`/revista/${revista.id}`} className="revista-card">
