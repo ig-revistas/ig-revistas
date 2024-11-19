@@ -1,0 +1,127 @@
+.navbar {
+    background-color: #3c3c3c; 
+    width: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 10px 20px; 
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3), 
+                -8px -8px 15px rgba(255, 255, 255, 0.2);
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1000; 
+    transition: box-shadow 0.3s ease;
+}
+
+.navbar:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), 
+                -5px -5px 10px rgba(255, 255, 255, 0.3);
+}
+
+.navbar ul {
+    list-style-type: none; 
+    display: flex; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.navbar li {
+    background-color: #000000; 
+    color: white; 
+    display: inline-block; 
+    padding: 5px 35px; 
+    font-weight: 700; 
+    font-size: 1.4rem; 
+    transition: all 0.5s ease;  
+    cursor: pointer; 
+    border-radius: 10px; 
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 
+                -5px -5px 10px rgba(255, 255, 255, 0.1);
+}
+
+.navbar li:hover {
+    border-radius: 20px; 
+    background-color: rgb(255, 255, 255); 
+    color: #000000; 
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 
+                -3px -3px 5px rgba(255, 255, 255, 0.2);
+}
+
+.navbar a {
+    color: white; 
+    text-decoration: none; 
+}
+
+.navbar a:hover {
+    text-decoration: underline; 
+}
+
+.navbar .registro {
+    margin-left: auto; 
+}
+
+.menu-container {
+    position: absolute;
+    top: 60px; 
+    right: 20px; 
+    z-index: 9999;
+}
+
+.card {
+    width: 200px;
+    background-color: rgba(36, 40, 50, 1);
+    background-image: linear-gradient(
+        139deg,
+        rgba(36, 40, 50, 1) 0%,
+        rgba(36, 40, 50, 1) 0%,
+        rgba(37, 28, 40, 1) 100%
+    );
+    border-radius: 10px;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card .separator {
+    border-top: 1.5px solid #42434a;
+}
+
+.card .list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0px 10px;
+}
+
+.card .list .element {
+    display: flex;
+    align-items: center;
+    color: #7e8590;
+    gap: 10px;
+    transition: all 0.3s ease-out;
+    padding: 4px 7px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.card .list .element:hover {
+    background-color: #5353ff;
+    color: #ffffff;
+    transform: translate(1px, -1px);
+}
+
+.card .list .element.settings {
+    color: #bd89ff;
+}
+
+.card .list .element.logout {
+    color: #bd89ff;
+}
+
+.card .list:last-child .element {
+    color: #bd89ff;
+}
