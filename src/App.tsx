@@ -9,6 +9,9 @@ import RevistaForm from './componentes/revistaForm/RevistaForm';
 import DetalleRevista from './componentes/detalleRevista/DetalleRevista'; 
 import PrivateRoute from './componentes/rutaPrivada/RutaPrivada';
 import './css/App.css';
+import Catalogo from './componentes/catalogo/Catalogo';
+import EditarRevistaForm from './componentes/revistaForm/EditarRevistaForm';
+import EliminarRevistaForm from './componentes/revistaForm/EliminarRevistaForm';
 
 const App: React.FC = () => {
     const { revistas, error, loading } = useRevistas();
@@ -26,6 +29,7 @@ const App: React.FC = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/registro" element={<Registro />} />
                     
+                    {/* Ruta para nueva revista (solo ADMIN) */}
                     <Route 
                         path="/new_revista"
                         element={
@@ -34,10 +38,35 @@ const App: React.FC = () => {
                             </PrivateRoute>
                         }
                     />
+                    
+                    {/* Ruta para editar revista */}
+                    <Route 
+                        path="/editar-revista/:id"
+                        element={
+                            <PrivateRoute rol="ADMIN_ROLE">
+                                <EditarRevistaForm />
+                            </PrivateRoute>
+                        }
+                    />
+
+                     {/* Ruta para eliminar revista */}
+                     <Route 
+                        path="/eliminar-revista/:id"
+                        element={
+                            <PrivateRoute rol="ADMIN_ROLE">
+                                <EliminarRevistaForm />
+                            </PrivateRoute>
+                        }
+                    />
+                    
+                    {/* Ruta para detalle de revista */}
                     <Route 
                         path="/revista/:id"
                         element={<DetalleRevista revistas={revistas} />} 
                     />
+                    
+                    {/* Ruta para el catálogo */}
+                    <Route path="/catalogo" element={<Catalogo />} />
                 </Routes>
             </div>
         </Router>

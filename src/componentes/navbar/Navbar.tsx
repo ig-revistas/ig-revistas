@@ -2,10 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authprovider';
 import Barrabusqueda from './barraBusqueda/Barrabusqueda';
-import BurbujaDeUsuario from './BurbujaDeUsuario/BurbujaDeUsuario';
 import { Revista } from '../../tipos/Revista';
 import './Navbar.css';
-import MenuUsuario from '../menuUsuario/MenuUsuario'; 
 
 interface NavbarProps {
     revistas: Revista[];
@@ -15,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
     const authContext = useContext(AuthContext);
     const isLoggedIn = authContext?.auth.isLoggedIn;
 
-    const [menuVisible, setMenuVisible] = useState(false); 
+    const [menuVisible, setMenuVisible] = useState(false);
 
     const isAdmin = () => {
         const rol = authContext?.auth.user?.roles;
@@ -23,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
     };
 
     const toggleMenu = () => {
-        setMenuVisible(!menuVisible); 
+        setMenuVisible(!menuVisible);
     };
 
     return (
@@ -32,35 +30,51 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
-                
+
                 {isAdmin() && (
-                    <li>
-                        <Link to='/new_revista'>Nueva Revista</Link>
+                    <li className="gestion-revistas">
+                        <button onClick={toggleMenu}>Gestión de Revistas</button>
+                        {menuVisible && (
+                            <div className="menu-opciones">
+                                <div className="card">
+                                    <ul className="list">
+                                        <li className="element">
+                                            <Link to="/new_revista">Nueva Revista</Link>
+                                        </li>
+                                        <li className="element">
+                                            <Link to="/editar-revista">Editar Revista</Link>
+                                        </li>
+                                        <li className="element">
+                                            <Link to="/eliminar_revista">Eliminar Revista</Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
                     </li>
                 )}
             </ul>
 
+            {/* Mostrar revistas en el home */}
             <Barrabusqueda revistas={revistas} />
 
             <ul>
                 {!isLoggedIn ? (
                     <li>
-                        <Link className='registro' to="/Login">Iniciar Sesion</Link>
+                        <Link className="registro" to="/Login">
+                            Iniciar Sesión
+                        </Link>
                     </li>
                 ) : (
-                    <li onClick={toggleMenu} className="usuario-icono"> 
-                        <BurbujaDeUsuario />
+                    <li>
+                        <button onClick={() => authContext?.cerrarSesion()}>
+                            Cerrar Sesión
+                        </button>
                     </li>
                 )}
             </ul>
-
-            {menuVisible && (
-                <div className="menu-container"> 
-                    <MenuUsuario />
-                </div>
-            )}
         </nav>
     );
-}
+};
 
 export default Navbar;

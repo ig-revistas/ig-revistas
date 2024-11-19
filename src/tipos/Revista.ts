@@ -6,7 +6,7 @@ export interface Revista {
     editorial: string;
     descripcion: string; 
     portadaUrl: string;
-    estado: Estado.DISPONIBLE;
+    estado: Estado;
     fechaDePublicacion: string;
     ejemplares: number;
 }
