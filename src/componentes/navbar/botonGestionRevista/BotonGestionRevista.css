@@ -1,0 +1,28 @@
+.boton-gestion-revista-container {
+  position: relative;
+}
+
+.boton-gestion-revista button {
+  background-color: #1e1e1e; 
+  color: white;
+  padding: 8px 40px; 
+  font-weight: 600;
+  font-size: 1.2rem; 
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.3),
+    -4px -4px 8px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.boton-gestion-revista button:hover {
+  background-color: #ffffff; 
+  color: #1e1e1e; 
+  box-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.3),
+    -2px -2px 4px rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  transform: translateY(-2px); 
+}
