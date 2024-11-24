@@ -1,4 +1,4 @@
-.listado-revistas__contenedor {
+.listado-reserva__contenedor {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,18 +10,18 @@
     transition: 0.4s ease-in-out;
 }
 
-.listado-revistas__contenedor:hover {
+.listado-reserva__contenedor:hover {
     transform: scale(1.05);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5), -4px -4px 10px rgba(255, 255, 255, 0.2);
 }
 
-.listado-revistas__header {
+.listado-reserva__header {
     text-align: center;
     color: rgb(255, 255, 255);
     margin-bottom: 20px;
 }
 
-.listado-revistas__header h1 {
+.listado-reserva__header h1 {
     font-size: 2em;
 }
 
@@ -89,8 +89,8 @@
     gap: 10px;
 }
 
-.listado-revistas__boton--editar,
-.listado-revistas__boton--eliminar {
+.listado-reserva__boton--aprobar,
+.listado-reserva__boton--rechazar {
     width: 150px;
     height: 50px;
     cursor: pointer;
@@ -104,18 +104,18 @@
     transition: 0.4s ease-in-out;
 }
 
-.listado-revistas__boton--editar {
-    background-color: #1e90ff;
+.listado-reserva__boton--aprobar {
+    background-color: #16ce81;
 }
 
-.listado-revistas__boton--editar:hover {
-    background-color: #4682b4;
+.listado-reserva__boton--aprobar:hover {
+    background-color: #11a53ec7;
 }
 
-.listado-revistas__boton--eliminar {
+.listado-reserva__boton--rechazar {
     background-color: #e62222;
 }
 
-.listado-revistas__boton--eliminar:hover {
-    background-color: #ff3636;
+.listado-reserva__boton--rechazar:hover {
+    background-color: #c53131;
 }

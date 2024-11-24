@@ -10,7 +10,7 @@ interface ListadoDeRevistasProps {
 
 const ListadoDeRevistas: React.FC<ListadoDeRevistasProps> = () => {
     const { revistas, error, loading } = useRevistas(); 
-    const [searchTerm, setSearchTerm] = useState<string>(''); 
+    const [searchTerm] = useState<string>(''); 
 
     const filteredRevistas = revistas.filter(
         (revista) =>

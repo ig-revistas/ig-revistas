@@ -23,7 +23,10 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
         const rol = authContext?.auth.user?.roles;
         return rol?.includes('ADMIN_ROLE');
     };
-
+    const isOperador = () => {
+        const rol = authContext?.auth.user?.roles;
+        return rol?.includes('OPERADOR_ROLE');
+    };
     const toggleMenuUsuario = () => {
         setMenuUsuarioVisible(!menuUsuarioVisible);
     };
@@ -56,6 +59,13 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                         <BotonGestionRevista />
                     </li>
                 )}
+                {isOperador() && (
+                    <li>
+                        <Link to="/reservasPendientes">Pendiente</Link>
+                    </li>
+                )}
+
+                
             </ul>
 
             <Barrabusqueda revistas={revistas} />

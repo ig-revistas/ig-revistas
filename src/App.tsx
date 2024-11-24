@@ -10,10 +10,12 @@ import DetalleRevista from './componentes/detalleRevista/DetalleRevista';
 import ListadoDeRevistas from './componentes/listadoDeRevistas/ListadoDeRevistas'; 
 import PrivateRoute from './componentes/rutaPrivada/RutaPrivada';
 import './css/App.css';
+import ReservaComponent from './componentes/listaDeReserva/listaReservaOperador/listaReservaOperador';
+
 
 const App: React.FC = () => {
     const { revistas, error, loading } = useRevistas();
-
+    
     return (
         <Router>
             <div className="App">
@@ -23,7 +25,13 @@ const App: React.FC = () => {
                 {error && <p>{error}</p>}
 
                 <Routes>
-                    <Route path="/revistas" element={<ListadoDeRevistas revistas={revistas} />} />
+                    <Route 
+                        path="/revistas" 
+                        element={
+                            <PrivateRoute rol="ADMIN_ROLE">
+                                <ListadoDeRevistas revistas={revistas} />
+                            </PrivateRoute>
+                        } />
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/registro" element={<Registro />} />                      
@@ -38,7 +46,18 @@ const App: React.FC = () => {
                     />
                     <Route 
                         path="/revista/:id"
-                        element={<DetalleRevista revistas={revistas} />} 
+                        element={
+                                <DetalleRevista revistas={revistas} />
+                        } 
+                    />
+                    <Route 
+                        path='/reservasPendientes'
+                        element={
+                            <PrivateRoute rol="OPERADOR_ROLE">
+                                <ReservaComponent />
+                            </PrivateRoute>
+                        }
+                                
                     />
                 </Routes>
             </div>
