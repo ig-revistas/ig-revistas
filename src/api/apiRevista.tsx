@@ -8,6 +8,7 @@ const apiRevista = axios.create({
 apiRevista.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem('accessToken');
     const urlsAbiertas = [
+        '/reserva/usuario/**',
         '/login',
         '/home',
         '/uploads',

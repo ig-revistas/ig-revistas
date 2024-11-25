@@ -1,7 +1,10 @@
 @import './Variables.css';
 
+
+a{
+    color: antiquewhite;
+}
 * {
-    
     background: none;
     border: none;
     outline: none;

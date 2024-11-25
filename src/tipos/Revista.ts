@@ -6,10 +6,11 @@ export interface Revista {
     editorial: string;
     descripcion: string; 
     portadaUrl: string;
-    estado: Estado.DISPONIBLE;
+    estado: Estado;  
     fechaDePublicacion: string;
     ejemplares: number;
 }
+
 export enum Estado {
     DISPONIBLE = 'DISPONIBLE',
     PRESTADA = 'PRESTADA',

@@ -14,7 +14,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
     const authContext = useContext(AuthContext);
-    const isLoggedIn = authContext?.auth.isLoggedIn;
+    const [isLoggedIn] = useState(authContext?.auth.isLoggedIn);
 
     const [menuUsuarioVisible, setMenuUsuarioVisible] = useState(false);
     const usuarioMenuRef = useRef<HTMLLIElement>(null); 
@@ -39,6 +39,9 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
             setMenuUsuarioVisible(false);
         }
     };
+    useEffect(() => {
+       console.log(isLoggedIn)
+    }, [isLoggedIn]);
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
@@ -51,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
         <nav className="navbar">
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Catálogo</Link>
                 </li>
 
                 {isAdmin() && (
