@@ -13,7 +13,6 @@ apiRevista.interceptors.request.use((config) => {
         '/uploads',
         '/revistas/uploads',
         '/registrarse',
-        
     ];
     if (accessToken && config.headers) {
         if (!urlsAbiertas.some(url => config.url?.includes(url)) && 
