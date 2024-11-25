@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import apiRevista from '../api/apiRevista';
 import AuthContext from "../context/authprovider";
-
 const LOGIN_URL = '/login';
 
 interface LoginResponse {
@@ -15,10 +14,13 @@ interface LoginResponse {
     };
 }
 
+import { useNavigate } from 'react-router-dom';
+
 const useLogin = () => {
     const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLDivElement>(null);
     const authContext = useContext(AuthContext);
+    const navigate = useNavigate(); 
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,15 +34,16 @@ const useLogin = () => {
     }, []);
 
     useEffect(() => {
-        setErrMsg('');  
+        setErrMsg('');
     }, [username, password]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true); 
+        setLoading(true);
 
         try {
-            const response = await apiRevista.post<LoginResponse>(LOGIN_URL,
+            const response = await apiRevista.post<LoginResponse>(
+                LOGIN_URL,
                 JSON.stringify({ username, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -52,14 +55,14 @@ const useLogin = () => {
             const userData = response.data.usuario;
 
             if (token) {
-                localStorage.setItem("accessToken", token);
+                localStorage.setItem('accessToken', token);
             }
 
             if (authContext) {
                 authContext.setAuth({
                     isLoggedIn: true,
                     user: {
-                        id: userData.id,  
+                        id: userData.id,
                         name: userData.name,
                         roles: userData.roles,
                         email: userData.email,
@@ -71,10 +74,11 @@ const useLogin = () => {
 
             setUsername('');
             setPassword('');
-            setLoading(false);  
+            setLoading(false);
 
+            navigate('/'); 
         } catch (err: any) {
-            setLoading(false); 
+            setLoading(false);
 
             if (!err?.response) {
                 setErrMsg('El servidor no responde');
@@ -96,7 +100,7 @@ const useLogin = () => {
         username,
         password,
         errMsg,
-        loading,  
+        loading,
         setUsername,
         setPassword,
         handleSubmit,
@@ -104,3 +108,4 @@ const useLogin = () => {
 };
 
 export default useLogin;
+

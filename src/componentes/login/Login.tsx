@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import React from 'react';
 import './Login.css';
 import useLogin from '../../hooks/useLogin';
 
@@ -15,18 +14,6 @@ const Login = () => {
         setPassword, 
         handleSubmit 
     } = useLogin();
-
-    const navigate = useNavigate();
-
-   
-    React.useEffect(() => {
-        if (username && password) {
-            if (!loading && !errMsg) {
-                navigate('/');  
-            }
-        }
-    }, [loading, errMsg, navigate]);
-
     return (
         <div className="login-container">
             {loading ? (  

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Revista } from '../../revista';
+import { Revista } from '../../../tipos/Revista';
 import './BarraBusqueda.css';
 
 interface BarrabusquedaProps {
@@ -52,7 +52,7 @@ const Barrabusqueda: React.FC<BarrabusquedaProps> = ({ revistas }) => {
         }
     };
 
-    const handleRevistaClick = (revistaId: number) => {
+    const handleRevistaClick = (revistaId: string) => {
         navigate(`/revista/${revistaId}`);
     };
 

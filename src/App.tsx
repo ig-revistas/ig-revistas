@@ -8,6 +8,7 @@ import Registro from './componentes/register/Register';
 import RevistaForm from './componentes/revistaForm/RevistaForm';
 import DetalleRevista from './componentes/detalleRevista/DetalleRevista';
 import ListadoDeRevistas from './componentes/listadoDeRevistas/ListadoDeRevistas'; 
+import RevistasReservadas from './componentes/revista/RevistasReservadas/RevistasReservadas';
 import PrivateRoute from './componentes/rutaPrivada/RutaPrivada';
 import './css/App.css';
 
@@ -27,7 +28,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/registro" element={<Registro />} />                      
-                    
+                    <Route path="/revistas-reservadas" element={<RevistasReservadas />} />
                     <Route 
                         path="/new_revista"
                         element={
