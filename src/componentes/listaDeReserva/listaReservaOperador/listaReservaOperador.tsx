@@ -99,7 +99,7 @@ const ReservaComponent = () => {
                             <tr key={reserva.id}>
                                 <td>{reserva.usuario.email}</td>
                                 <td>{reserva.revista.titulo}</td>
-                                <td>{reserva.fechaPedirReserva}</td>
+                                <td>{reserva.fechaPedirReserva.toString()}</td>
                                 <td>{reserva.estado}</td>
                                 
                                 <td>

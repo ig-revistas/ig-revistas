@@ -1,4 +1,5 @@
 export interface tipoReserva {
+    id:string;
     tiempoVigente: number;
     fechaAprobacion: Date | null;        
     fechaPedirReserva: Date;     

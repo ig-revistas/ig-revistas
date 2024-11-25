@@ -14,9 +14,9 @@ const APROBAR_RECERVA_URL= RECERVA_URL+'/aprobar'
 export interface tipoReservaConDetalles{
     id: string;
     tiempoVigente: number | null;
-    fechaAprobacion: string | null;
-    fechaPedirReserva: string;
-    fechaRechazo: string | null;
+    fechaAprobacion: Date | null;
+    fechaPedirReserva: Date;
+    fechaRechazo: Date | null;
     estado: EstadoReserva;
     usuario: usuarioInfo,
     revista: revistaInfo
