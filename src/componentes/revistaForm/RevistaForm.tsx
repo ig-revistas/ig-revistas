@@ -70,7 +70,7 @@ const RevistaForm: React.FC = () => {
 
     const resetFormulario = (exito: boolean) => {
         const formularioVacio: Revista = {
-            id: 0,
+            id: '',
             titulo: '',
             autor: '',
             categoria: '',

@@ -6,7 +6,7 @@ const REGISTER_URL = '/revistas';
 
 
 const initialRevista: tipoRevista = {
-    id: 0,
+    id: '',
     titulo: '',
     autor: '',
     categoria: '',

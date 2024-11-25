@@ -5,7 +5,7 @@
     background: none;
     border: none;
     outline: none;
-    color: none;
+    color: white;
 }
 html {
     font-family: var(--font-family);

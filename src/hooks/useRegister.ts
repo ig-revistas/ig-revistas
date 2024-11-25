@@ -72,7 +72,7 @@ export const useRegistro = () => {
                     withCredentials: true
                 }
             )
-            
+            console.log("Token de acceso:", response.data.accessToken);
             setExito(true);
             setUsuario('');
             setCorreo('');

@@ -22,7 +22,7 @@ const Login = () => {
     React.useEffect(() => {
         if (username && password) {
             if (!loading && !errMsg) {
-                navigate('/home');  
+                navigate('/');  
             }
         }
     }, [loading, errMsg, navigate]);
