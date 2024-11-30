@@ -14,9 +14,8 @@ export interface Revista {
 }
 
 export enum Estado {
-    DISPONIBLE = 'DISPONIBLE',
-    PRESTADA = 'PRESTADA',
-    RESERVADA = 'RESERVADA',
-    DEVUELTA = 'DEVUELTA',
-    SUSPENDIDA = 'SUSPENDIDA'
+    DISPONIBLE,
+    PRESTADA,
+    DEVUELTA,
+    SUSPENDIDA
 }

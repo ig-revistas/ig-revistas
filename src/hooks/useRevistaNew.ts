@@ -15,8 +15,8 @@ const initialRevista: tipoRevista = {
     descripcion: '',
     portadaUrl: '',
     estado: Estado.DISPONIBLE,
-    fechaDePublicacion: '',
-    ejemplares: 1,
+    fechaPublicacion: '',
+    cantidadDisponible: 1,
     updatedData: function (id: string, updatedData: any): void {
         throw new Error("Function not implemented.");
     }

@@ -85,7 +85,10 @@ const RevistaForm: React.FC = () => {
             portadaUrl: '',
             estado: Estado.DISPONIBLE,
             fechaPublicacion: '',
-            cantidadDisponible: 1
+            cantidadDisponible: 1,
+            updatedData: function (id: string, updatedData: any): void {
+                throw new Error("Function not implemented.");
+            }
         }
         if (exito) {
             Swal.fire("Éxito", "Revista creada exitosamente.", "success");
