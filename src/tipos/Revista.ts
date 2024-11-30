@@ -1,4 +1,6 @@
 export interface Revista {
+    updatedData(id: string, updatedData: any): void;
+
     id: string;
     titulo: string;
     autor: string;

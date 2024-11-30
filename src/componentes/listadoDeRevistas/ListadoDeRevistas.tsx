@@ -11,8 +11,9 @@ interface ListadoDeRevistasProps {
 }
 
 const ListadoDeRevistas: React.FC<ListadoDeRevistasProps> = () => {
-    const { revistas, error, loading } = useRevistas(); 
+    const { revistas, error, loading, setRevistas } = useRevistas(); 
     const [searchTerm] = useState<string>(''); 
+    const navigate = useNavigate();
 
   const filteredRevistas = revistas.filter(
     (revista) =>
@@ -23,8 +24,9 @@ const ListadoDeRevistas: React.FC<ListadoDeRevistasProps> = () => {
   const editarRevista = async (updatedData: tipoRevista) => {
     const response = await apiRevista.put(`/revistas/${updatedData.id}`);
     Swal.fire('Actualizado', 'La revista ha sido actualizada', 'success');
-    navigate('/revistas');
-  };
+    navigate('/revistas'); 
+};
+  
 
   const suspenderRevista = async (id: string) => {
     Swal.fire({
@@ -56,7 +58,7 @@ const ListadoDeRevistas: React.FC<ListadoDeRevistasProps> = () => {
             `La revista ha sido suspendida por ${diasSuspension} días.`,
             'success'
           );
-          setRevistas((prevRevistas) =>
+          setRevistas((prevRevistas: any[]) =>
             prevRevistas.map((revista) =>
               revista.id === id
                 ? { ...revista, estado: Estado.SUSPENDIDA, diasSuspension }
@@ -160,4 +162,5 @@ const ListadoDeRevistas: React.FC<ListadoDeRevistasProps> = () => {
       </div>
     </div>
 )};
+
 export default ListadoDeRevistas;
