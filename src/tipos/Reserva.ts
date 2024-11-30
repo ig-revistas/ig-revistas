@@ -1,13 +1,16 @@
 export interface tipoReserva {
-    id:string;
+    id :string;
     tiempoVigente: number;
     fechaAprobacion: Date | null;        
     fechaPedirReserva: Date;     
     fechaRechazo: Date | null;    
     estado: EstadoReserva;
-    usuario: string;
+    idUsuario: string;
     revista: Revista;
-    portadaRevista?: string; 
+    portadaRevista?: string;
+    mailUsuario: string; 
+    tituloRevista: string;
+    estadoRevista: string;
 }
 
 export type EstadoReserva = 'PENDIENTE' | 'APROBADA' | 'RECHAZADA';
@@ -19,8 +22,9 @@ export interface Revista {
     fechaPublicacion: Date;
     categoria: string;
     editorial: string;
-    estado: string;
+    estado: EstadoRevista;
     cantidadDisponible: number;
     descripcion: string;
     portadaUrl: string;
 }
+export type EstadoRevista = 'DISPONIBLE'|'PENDIENTE' | 'RESERVADA' | 'DEVUELTA';

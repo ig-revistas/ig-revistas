@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Navigate } from "react-router-dom";
 import './RevistaForm.css';
 
+
 const CATEGORIAS = ['Ciencia', 'Tecnología', 'Arte', 'Historia', 'Entretenimiento', 'Deporte'];
 
 const RevistaForm: React.FC = () => {
@@ -23,10 +24,10 @@ const RevistaForm: React.FC = () => {
         const nuevosErrores: { [key: string]: string } = {};
         if (revista?.titulo.trim().length < 3) nuevosErrores.titulo='El título debe tener más de 3 caracteres.';
         if (revista?.editorial.length > 50) nuevosErrores.editorial='La editorial no puede contener más de 50 caracteres.';
-        if (!revista?.categoria) nuevosErrores.categoria='Debe seleccionar una categoría.';
-        if (!revista?.autor.trim()) nuevosErrores.autor='El campo autor es obligatorio.';
-        if (revista?.ejemplares < 1) nuevosErrores.ejemplares='Debe haber 1 o más ejemplares.';
-        if (revista?.fechaDePublicacion && new Date(revista?.fechaDePublicacion) > new Date()) {
+        if (revista?.categoria=='') nuevosErrores.categoria='Debe seleccionar una categoría.';
+        if (revista?.autor=='') nuevosErrores.autor='El campo autor es obligatorio.';
+        if (revista?.cantidadDisponible < 1) nuevosErrores.cantidadDisponible='Debe haber 1 o más ejemplares.';
+        if (revista?.fechaPublicacion && new Date(revista?.fechaPublicacion) > new Date()) {
             nuevosErrores.fechaDePublicacion='La fecha de publicación debe ser anterior o igual a la actual.';
         }
         if (revista?.descripcion.length > 200) nuevosErrores.descripcion='La descripción no puede contener más de 200 caracteres.';
@@ -43,6 +44,7 @@ const RevistaForm: React.FC = () => {
 
         try {
             const formData = new FormData();
+            console.log('formData: '+formData)
             const revistaData = {
                 autor: revista.autor,
                 titulo: revista.titulo,
@@ -50,10 +52,9 @@ const RevistaForm: React.FC = () => {
                 descripcion: revista.descripcion,
                 editorial: revista.editorial,
                 estado: revista.estado,
-                cantidad_disponible: revista.ejemplares,
-                fecha_publicacion: revista.fechaDePublicacion,
+                cantidadDisponible: revista.cantidadDisponible,
+                fechaPublicacion: revista.fechaPublicacion,
             };
-
             formData.append('revista', new Blob([JSON.stringify(revistaData)], { type: 'application/json' }));
             if (portada) formData.append('portada', portada);
 
@@ -61,12 +62,17 @@ const RevistaForm: React.FC = () => {
             resetFormulario(true);
         } catch (error) {
             console.error('Error al enviar los datos:', error);
-            Swal.fire("Error", "Error al crear la revista. Por favor, inténtelo de nuevo.", "error");
+            Swal.fire({
+                title:"Error",
+                text:"Error al crear la revista. Por favor, inténtelo de nuevo." ,
+                icon:"error"});
             resetFormulario(false);
         } finally {
             setLoading(false);
         }
     };
+    
+        
 
     const resetFormulario = (exito: boolean) => {
         const formularioVacio: Revista = {
@@ -78,8 +84,8 @@ const RevistaForm: React.FC = () => {
             descripcion: '',
             portadaUrl: '',
             estado: Estado.DISPONIBLE,
-            fechaDePublicacion: '',
-            ejemplares: 1
+            fechaPublicacion: '',
+            cantidadDisponible: 1
         }
         if (exito) {
             Swal.fire("Éxito", "Revista creada exitosamente.", "success");
@@ -171,8 +177,8 @@ const RevistaForm: React.FC = () => {
                     Ejemplares Disponibles:
                     <input
                         type="number"
-                        value={revista?.ejemplares || 1}
-                        onChange={(e) => setRevista({ ...revista, ejemplares: parseInt(e.target.value) })}
+                        value={revista?.cantidadDisponible || 1}
+                        onChange={(e) => setRevista({ ...revista, cantidadDisponible: parseInt(e.target.value) })}
                         min="1"
                         required
                     />
@@ -183,8 +189,8 @@ const RevistaForm: React.FC = () => {
                     Fecha de Publicación:
                     <input
                         type="date"
-                        value={revista?.fechaDePublicacion || ''}
-                        onChange={(e) => setRevista({ ...revista, fechaDePublicacion: e.target.value })}
+                        value={revista?.fechaPublicacion || ''}
+                        onChange={(e) => setRevista({ ...revista, fechaPublicacion: e.target.value })}
                     />
                     {errores.fechaDePublicacion && <p className="error-mensaje">{errores.fechaDePublicacion}</p>}
                 </label>

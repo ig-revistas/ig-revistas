@@ -14,8 +14,8 @@ const initialRevista: tipoRevista = {
     descripcion: '',
     portadaUrl: '',
     estado: Estado.DISPONIBLE,
-    fechaDePublicacion: '',
-    ejemplares: 1
+    fechaPublicacion: '',
+    cantidadDisponible: 1
 };
 
 

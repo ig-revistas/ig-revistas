@@ -7,8 +7,8 @@ export interface Revista {
     descripcion: string; 
     portadaUrl: string;
     estado: Estado;  
-    fechaDePublicacion: string;
-    ejemplares: number;
+    fechaPublicacion: string;
+    cantidadDisponible: number;
 }
 
 export enum Estado {

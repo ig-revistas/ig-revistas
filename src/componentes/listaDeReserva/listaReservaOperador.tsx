@@ -8,8 +8,8 @@ import "./listaReservaOperador.css"
 
 const ReservaComponent = () => {
     const { pedirTodasLasReservas,
-            aprobarRecerva,
-            rechazarRecerva, 
+            aprobarReserva,
+            rechazarReserva, 
             errMsg, 
             reservas,
             cargando } = useReservaPendiente();
@@ -37,7 +37,7 @@ const ReservaComponent = () => {
              
     }
         
-    const manejarAprobarRecerva=(id:string, usuarioNombre:string)=>{
+    const manejarAprobarReserva=(idReserva:string, usuarioNombre:string)=>{
        Swal.fire({
             title:"Especifique el tiempo vigente",
             text:`¿Cuantos dias tendra el usuario ${usuarioNombre} para devolver la revista?`,
@@ -59,16 +59,16 @@ const ReservaComponent = () => {
                     const tiempoVigente = parseInt(result.value);
                     cartelWarningEstado("aprobar",usuarioNombre ,async()=>{
                     
-                        await aprobarRecerva(id, tiempoVigente)
+                        await aprobarReserva(idReserva, tiempoVigente)
                         cartelDeExito("aprobada")
                         pedirTodasLasReservas();
                         })
                 }
             })
     }
-    const manejarRechazarRecerva=(id:string, usuarioNombre:string)=>{
+    const manejarRechazarReserva=(idReserva:string, usuarioNombre:string)=>{
         cartelWarningEstado("rechazar", usuarioNombre,async()=>{
-            await rechazarRecerva(id)
+            await rechazarReserva(idReserva)
             cartelDeExito("rechazada")
             pedirTodasLasReservas();
             })
@@ -77,7 +77,7 @@ const ReservaComponent = () => {
         
         <div className="listado-reserva__contenedor">
             <div className="listado-reserva__header">
-                <h1>Lista de reservas 'Pendientes'</h1>
+                <h1>Lista de reservas Pendientes</h1>
                 {cargando && <p>Cargando...</p>} 
                 {errMsg && <p className="error">{errMsg}</p>} 
             </div>
@@ -86,6 +86,7 @@ const ReservaComponent = () => {
                     <tr>
                         <th>Usuario</th>
                         <th>Revista</th>
+                        <th>Estado de la Revista</th>
                         <th>Fecha de la petición</th>
                         <th>Estado</th>
                         
@@ -97,18 +98,19 @@ const ReservaComponent = () => {
                         console.log("Reserva: ", reserva); 
                         return ( 
                             <tr key={reserva.id}>
-                                <td>{reserva.usuario.email}</td>
-                                <td>{reserva.revista.titulo}</td>
+                                <td>{reserva.mailUsuario}</td>
+                                <td>{reserva.tituloRevista}</td>
+                                <td>{reserva.estadoRevista}</td>
                                 <td>{reserva.fechaPedirReserva.toString()}</td>
                                 <td>{reserva.estado}</td>
                                 
                                 <td>
-                                    <button onClick={() => manejarAprobarRecerva(reserva.id, reserva.usuario.email)} className="listado-reserva__boton--aprobar">
+                                    <button onClick={() => manejarAprobarReserva(reserva.id, reserva.mailUsuario)} className="listado-reserva__boton--aprobar">
                                         Aprobar
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => manejarRechazarRecerva(reserva.id, reserva.usuario.email)} className="listado-reserva__boton--rechazar">
+                                    <button onClick={() => manejarRechazarReserva(reserva.id, reserva.mailUsuario)} className="listado-reserva__boton--rechazar">
                                         Rechazar
                                     </button>
                                 </td>
