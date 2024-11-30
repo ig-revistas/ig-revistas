@@ -12,6 +12,8 @@ import RevistasReservadas from './componentes/revista/RevistasReservadas/Revista
 import PrivateRoute from './componentes/rutaPrivada/RutaPrivada';
 import './css/App.css';
 import ReservaComponent from './componentes/listaDeReserva/listaReservaOperador';
+import EditarRevistaForm from './componentes/revistaForm/EditarRevistaForm';
+
 
 
 const App: React.FC = () => {
@@ -50,6 +52,15 @@ const App: React.FC = () => {
                         element={
                                 <DetalleRevista revistas={revistas} />
                         } 
+                    />
+
+                    <Route 
+                        path="/editarRevista/:id" 
+                        element={
+                            <PrivateRoute rol="ADMIN_ROLE">
+                                <EditarRevistaForm />
+                            </PrivateRoute>
+                        }
                     />
                     <Route 
                         path='/reservasPendientes'
