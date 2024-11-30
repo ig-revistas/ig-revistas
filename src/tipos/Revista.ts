@@ -1,4 +1,6 @@
 export interface Revista {
+    updatedData(id: string, updatedData: any): void;
+
     id: string;
     titulo: string;
     autor: string;
@@ -15,5 +17,6 @@ export enum Estado {
     DISPONIBLE = 'DISPONIBLE',
     PRESTADA = 'PRESTADA',
     RESERVADA = 'RESERVADA',
-    DEVUELTA = 'DEVUELTA'
+    DEVUELTA = 'DEVUELTA',
+    SUSPENDIDA = 'SUSPENDIDA'
 }

@@ -90,6 +90,7 @@
 }
 
 .listado-revistas__boton--editar,
+.listado-revistas__boton--suspender,
 .listado-revistas__boton--eliminar {
     width: 150px;
     height: 50px;
@@ -118,4 +119,12 @@
 
 .listado-revistas__boton--eliminar:hover {
     background-color: #ff3636;
+}
+
+.listado-revistas__boton--suspender {
+    background-color: #eb9411;
+}
+
+.listado-revistas__boton--suspender:hover {
+    background-color: #d1830e;
 }
