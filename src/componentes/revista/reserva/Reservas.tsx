@@ -31,8 +31,8 @@ const Reservas = () => {
             {reservas.length > 0 ? (
                 <ul>
                     {reservas.map((reserva) => (
-                        <li key={`${reserva.usuario}-${reserva.revista.id}`}>
-                            {reserva.portadaRevista && (
+                        <li key={`${reserva.idUsuario}-${reserva.revista.id}`}>
+                            { reserva.portadaRevista && (
                                 <img
                                     src={reserva.portadaRevista}
                                     alt={`Portada de la revista ${reserva.revista.titulo}`}

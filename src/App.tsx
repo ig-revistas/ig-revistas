@@ -11,8 +11,9 @@ import ListadoDeRevistas from './componentes/listadoDeRevistas/ListadoDeRevistas
 import RevistasReservadas from './componentes/revista/RevistasReservadas/RevistasReservadas';
 import PrivateRoute from './componentes/rutaPrivada/RutaPrivada';
 import './css/App.css';
-import ReservaComponent from './componentes/listaDeReserva/listaReservaOperador/listaReservaOperador';
+import ReservaComponent from './componentes/listaDeReserva/listaReservaOperador';
 import EditarRevistaForm from './componentes/revistaForm/EditarRevistaForm';
+
 
 
 const App: React.FC = () => {
