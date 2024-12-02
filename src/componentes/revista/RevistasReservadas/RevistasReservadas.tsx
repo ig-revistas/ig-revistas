@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../../context/authprovider';
 import useReservas from '../../../hooks/useReservas';
-import { Revista } from '../../../tipos/Revista'; 
-import './RevistasReservadas.css'; 
+import './RevistasReservadas.css';
 
 const RevistasReservadas: React.FC = () => {
     const authContext = useContext(AuthContext);
@@ -39,24 +38,21 @@ const RevistasReservadas: React.FC = () => {
                 <p>No tienes revistas reservadas.</p>
             ) : (
                 <div className="revistas-grid">
-                    {reservas.map((reserva) => {
-                        console.log(`Portada URL: ${reserva.revista.portadaUrl}`);
-                        return (
-                            <div key={reserva.revista.id} className="revista-card">
-                                {reserva.revista.portadaUrl ? (
-                                    <img
-                                        src={`http://localhost:8080/revistas${reserva.revista.portadaUrl}`}
-                                        alt={`Portada de ${reserva.revista.titulo}`}
-                                        className="revista-portada"
-                                    />
-                                ) : (
-                                    <p>Imagen no disponible</p>
-                                )}
-                                <p><strong>Título:</strong> {reserva.revista.titulo}</p>
-                                <p><strong>Estado:</strong> {reserva.estado}</p>
-                            </div>
-                        );
-                    })}
+                    {reservas.map((reserva, index) => (
+                        <div key={reserva.revista.id || `revista-${index}`} className="revista-card">
+                            {reserva.portadaRevista ? (
+                                <img 
+                                src={`http://localhost:8080/revistas${reserva.portadaRevista}`} 
+                                alt={reserva.tituloRevista} 
+                                className="revista-portada" 
+                            />
+                            ) : (
+                                <p>Imagen no disponible</p>
+                            )}
+                            <p><strong>Título:</strong> {reserva.tituloRevista}</p>
+                            <p><strong>Estado:</strong> {reserva.estado}</p>
+                        </div>
+                    ))}
                 </div>
             )}
         </div>
