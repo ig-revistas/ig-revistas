@@ -61,7 +61,7 @@ const ListadoDeRevistas: React.FC<ListadoDeRevistasProps> = () => {
           setRevistas((prevRevistas: any[]) =>
             prevRevistas.map((revista) =>
               revista.id === id
-                ? { ...revista, estado: Estado.SUSPENDIDA, diasSuspension }
+                ? { ...revista, estado: "SUSPENDIDA", diasSuspension }
                 : revista
             )
           );
