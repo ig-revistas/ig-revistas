@@ -10,6 +10,7 @@ import DetalleRevista from './componentes/detalleRevista/DetalleRevista';
 import ListadoDeRevistas from './componentes/listadoDeRevistas/ListadoDeRevistas'; 
 import RevistasReservadas from './componentes/revista/RevistasReservadas/RevistasReservadas';
 import PrivateRoute from './componentes/rutaPrivada/RutaPrivada';
+import Settings from './componentes/menuUsuario/settings/Settings';
 import './css/App.css';
 import ReservaComponent from './componentes/listaDeReserva/listaReservaOperador';
 import EditarRevistaForm from './componentes/revistaForm/EditarRevistaForm';
@@ -68,9 +69,9 @@ const App: React.FC = () => {
                             <PrivateRoute rol="OPERADOR_ROLE">
                                 <ReservaComponent />
                             </PrivateRoute>
-                        }
-                                
+                        }          
                     />
+                     <Route path="/settings" element={<Settings />} />
                 </Routes>
             </div>
         </Router>

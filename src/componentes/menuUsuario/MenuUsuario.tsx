@@ -13,7 +13,7 @@ const MenuUsuario: React.FC = () => {
   };
 
   const handleSettings = () => {
-    navigate('/revistas-reservadas');
+    navigate('/settings');
   };
 
   return (
