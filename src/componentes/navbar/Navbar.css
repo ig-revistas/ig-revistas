@@ -53,11 +53,11 @@
   text-align: center;
 }
 
-
 .navbar .usuario-icono img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
+  margin-right: 10px;  /* Separación entre el avatar y el menú */
 }

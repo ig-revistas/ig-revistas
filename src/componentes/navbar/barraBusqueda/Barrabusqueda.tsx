@@ -56,6 +56,15 @@ const Barrabusqueda: React.FC<BarrabusquedaProps> = ({ revistas }) => {
         navigate(`/revista/${revistaId}`);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevenir el comportamiento predeterminado
+            if (query.trim() !== '') {
+                filterRevistas(query); // Realizar la búsqueda si hay texto
+            }
+        }
+    };
+
     return (
         <div className="barraBusqueda">
             <input
@@ -64,6 +73,7 @@ const Barrabusqueda: React.FC<BarrabusquedaProps> = ({ revistas }) => {
                 placeholder="Buscar por título o autor..."
                 value={query}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown} // Detectar "Enter" al escribir
                 className="entrada_busqueda"
             />
             {mostrarResultados && (

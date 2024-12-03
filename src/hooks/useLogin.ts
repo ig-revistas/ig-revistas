@@ -56,6 +56,7 @@ const useLogin = () => {
 
             if (token) {
                 localStorage.setItem('accessToken', token);
+                localStorage.setItem('user', JSON.stringify(userData)); // Guardar información del usuario
             }
 
             if (authContext) {
@@ -108,4 +109,3 @@ const useLogin = () => {
 };
 
 export default useLogin;
-

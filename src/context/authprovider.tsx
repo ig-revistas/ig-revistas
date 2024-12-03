@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
 
 interface User {
     id?: string; 
@@ -9,10 +9,9 @@ interface User {
     portadaUrl?: string; 
 }
 
-
 interface AuthContextType {
     auth: { isLoggedIn: boolean; user: User | null };
-    setAuth: React.Dispatch<React.SetStateAction<{ isLoggedIn: boolean; user: User | null }>>;
+    setAuth: React.Dispatch<React.SetStateAction<{ isLoggedIn: boolean; user: User | null }>>; 
     cerrarSesion: () => void;
     actualizarFotoPerfil: (newFotoUrl: string) => void;  
 }
@@ -20,18 +19,22 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [auth, setAuth] = useState<{ isLoggedIn: boolean; user: User | null }>(() => {
+    // Estado inicial basado en localStorage
+    const [auth, setAuth] = useState<{ isLoggedIn: boolean; user: User | null }>({ isLoggedIn: false, user: null });
+
+    // Cargar la información del usuario desde localStorage
+    useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
-            const user = { id: "1", name: "Usuario", roles: ["USER"], email: "user@example.com", token };
-            return { isLoggedIn: true, user };
+            const user = JSON.parse(localStorage.getItem('user') || '{}'); // Asegúrate de guardar la información del usuario también
+            setAuth({ isLoggedIn: true, user });
         }
-        return { isLoggedIn: false, user: null };
-    });
+    }, []);
 
     const cerrarSesion = () => {
         setAuth({ isLoggedIn: false, user: null });
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('user'); // Elimina la información del usuario al cerrar sesión
     };
 
     const actualizarFotoPerfil = (newFotoUrl: string) => {
