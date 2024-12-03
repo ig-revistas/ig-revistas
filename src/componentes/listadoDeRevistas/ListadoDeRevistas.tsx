@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useRevistas from '../../hooks/useRevistas';
 import './ListadoDeRevistas.css';
-import { Estado, Revista as tipoRevista } from '../../tipos/Revista';
+import { Revista as tipoRevista } from '../../tipos/Revista';
 import Swal from 'sweetalert2';
 import apiRevista from '../../api/apiRevista';
 

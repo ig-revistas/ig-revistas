@@ -60,7 +60,6 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                         <BotonGestionRevista />
                     </li>
                 )}
-                {isOperador() && (
                     <li>
                         <button
                             className="boton-revistas-reservadas"
@@ -69,7 +68,6 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                             Mis Revistas
                         </button>
                     </li>
-                )}
             </ul>
 
             <Barrabusqueda revistas={revistas} />

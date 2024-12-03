@@ -37,7 +37,7 @@ const RevistasReservadas: React.FC = () => {
             {reservas.length === 0 ? (
                 <p>No tienes revistas reservadas.</p>
             ) : (
-                <div className="revistas-grid">
+                <div className="mis-reservas-revistas-grid">
                     {reservas.map((reserva, index) => (
                         <div key={reserva.revista.id || `revista-${index}`} className="revista-card">
                             {reserva.portadaRevista ? (

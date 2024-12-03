@@ -1,7 +1,7 @@
 .mis-reservas-container {
     display: flex;
     flex-wrap: wrap; 
-    justify-content: flex-start; 
+    justify-content: center; 
     gap: 20px; 
     padding: 20px;
     box-sizing: border-box;
@@ -16,18 +16,9 @@
 
 .mis-reservas-revistas-grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; 
     gap: 10px;
-    width: 100%; 
+    overflow-x: auto; 
 }
 
-.mis-reservas-revistas-card {
-    flex: 0 1 150px;
-    margin: 10px;
-    transition: transform 0.2s;
-    background: #3c3c3c;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
-                -5px -5px 10px rgba(255, 255, 255, 0.2);
-    text-align: center; 
-}
+
