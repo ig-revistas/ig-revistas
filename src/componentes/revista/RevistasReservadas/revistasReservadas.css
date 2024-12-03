@@ -1,24 +1,56 @@
 .mis-reservas-container {
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 20px; 
+    flex-direction: column; /* Coloca los elementos en columna */
+    align-items: center;    /* Centra el contenido horizontalmente */
+    gap: 20px; /* Espaciado entre el título y la cuadrícula */
     padding: 20px;
     box-sizing: border-box;
 }
 
 .mis-reservas-container h2 {
-    width: 100%; 
-    color: #ffffff;
-    margin-bottom: 20px;
-    text-align: center;
+    color: #ffffff; 
+    font-size: 24px; /* Tamaño del texto del título */
+    text-align: center; 
+    margin: 0; /* Elimina márgenes externos */
 }
 
 .mis-reservas-revistas-grid {
     display: flex;
-    flex-wrap: nowrap; 
-    gap: 10px;
-    overflow-x: auto; 
+    flex-wrap: nowrap; /* Mantiene los elementos en una fila */
+    gap: 10px; /* Espaciado entre tarjetas */
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    padding-top: 10px; /* Añade espacio entre el título y las imágenes */
 }
 
+/* Estilo de las tarjetas dentro de la cuadrícula */
+.mis-reservas-revistas-grid .revista-card {
+    flex: 0 0 auto; /* Evita el redimensionamiento automático */
+    width: 180px; 
+    height: 230px; 
+    border-radius: 20px; 
+    background: #3c3c3c;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 
+                -5px -5px 10px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido se apile verticalmente */
+    align-items: center;
+    justify-content: flex-end; /* Mantiene el título debajo de la imagen */
+}
 
+.mis-reservas-revistas-grid .revista-portada {
+    width: 140px; 
+    height: 140px; 
+    object-fit: cover; /* Ajusta la imagen al tamaño sin deformarla */
+    border-radius: 10px;
+    margin-bottom: 10px; /* Espacio entre la imagen y el título */
+}
+
+.mis-reservas-revistas-grid .revista-titulo {
+    color: #ffffff; 
+    font-size: 16px; 
+    text-align: center; 
+    font-weight: bold; 
+    margin: 0; /* Asegura que no haya márgenes adicionales */
+}
