@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
     const usuarioMenuRef = useRef<HTMLLIElement>(null);
 
     const isAdmin = () => authContext?.auth.user?.roles?.includes('ADMIN_ROLE');
-    const isOperador = () => authContext?.auth.user?.roles?.includes('OPERADOR_ROLE');
+    const isUser = () => authContext?.auth.user?.roles?.includes('USER_ROLE');
 
     const toggleMenuUsuario = () => {
         setMenuUsuarioVisible(!menuUsuarioVisible);
@@ -60,6 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                         <BotonGestionRevista />
                     </li>
                 )}
+                {isUser() &&(
                     <li>
                         <button
                             className="boton-revistas-reservadas"
@@ -68,6 +69,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                             Mis Revistas
                         </button>
                     </li>
+                )}
             </ul>
 
             <Barrabusqueda revistas={revistas} />
@@ -86,15 +88,18 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                         className="usuario-icono"
                     >
                         {authContext?.auth.user?.portadaUrl ? (
-                            <img
-                                src={`http://localhost:8080${authContext.auth.user.portadaUrl}`}
-                                alt={`Foto de perfil de ${authContext.auth.user.name || 'Usuario'}`}
-                                className="perfil-avatar"
-                                onError={(e) => {
-                                    console.error('Error al cargar imagen:', e.currentTarget.src);
-                                    e.currentTarget.src = '/default.png';
-                                }}
-                            />
+                            <>
+                                <img
+                                    src={`http://localhost:8080${authContext.auth.user.portadaUrl}`}
+                                    alt={`Foto de perfil de ${authContext.auth.user.name || 'Usuario'}`}
+                                    className="perfil-avatar"
+                                    onError={(e) => {
+                                        console.error('Error al cargar imagen:', e.currentTarget.src);
+                                        e.currentTarget.src = '/default.png';
+                                    }}
+                                />
+                                <span>{authContext.auth.user.name}</span>
+                            </>
                         ) : (
                             <BurbujaDeUsuario />
                         )}
