@@ -16,7 +16,6 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
     const authContext = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [isLoggedIn, setIsLoggedIn] = useState(authContext?.auth.isLoggedIn);
     const [menuUsuarioVisible, setMenuUsuarioVisible] = useState(false);
     const usuarioMenuRef = useRef<HTMLLIElement>(null);
 
@@ -41,12 +40,11 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
     };
 
     useEffect(() => {
-        setIsLoggedIn(authContext?.auth.isLoggedIn);
         document.addEventListener('click', handleClickOutside);
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, [authContext?.auth.isLoggedIn]);
+    }, []);
 
     return (
         <nav className="navbar">
@@ -60,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                         <BotonGestionRevista />
                     </li>
                 )}
-                {isUser() &&(
+                {isUser() && (
                     <li>
                         <button
                             className="boton-revistas-reservadas"
@@ -75,7 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
             <Barrabusqueda revistas={revistas} />
 
             <ul>
-                {!isLoggedIn ? (
+                {!authContext?.auth.isLoggedIn ? (
                     <li>
                         <Link className="registro" to="/Login">
                             Iniciar Sesión
