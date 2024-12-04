@@ -1,12 +1,18 @@
 .mis-reservas-container {
+    background-color: #171717;
+    border-radius: 25px;
     display: flex;
     flex-direction: column; /* Coloca los elementos en columna */
     align-items: center;    /* Centra el contenido horizontalmente */
     gap: 20px; /* Espaciado entre el título y la cuadrícula */
     padding: 20px;
     box-sizing: border-box;
+    transition: 0.4s ease-in-out;
 }
-
+.mis-reservas-container:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5), -4px -4px 10px rgba(255, 255, 255, 0.2);
+}
 .mis-reservas-container h2 {
     color: #ffffff; 
     font-size: 24px; /* Tamaño del texto del título */
