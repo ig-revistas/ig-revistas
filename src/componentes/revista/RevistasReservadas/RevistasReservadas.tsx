@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../../context/authprovider';
 import useReservas from '../../../hooks/useReservas';
-import './RevistasReservadas.css';
+import './RevistasReservadas.css'
 
 const RevistasReservadas: React.FC = () => {
     const authContext = useContext(AuthContext);

@@ -1,61 +1,73 @@
 services:
-  backend:   
-    build: Trabajo 
-    restart: always
-    secrets:
-      - db-password
-    environment:
-      MYSQL_HOST: db
-    networks:
-      - react-spring
-      - spring-mysql
-    depends_on:
-      db:
-        condition: service_healthy
-    ports:
-      - "9090:8080"
   db:
-    
     image: mysql:latest
-    
     environment:
-      - MYSQL_DATABASE=revistas
+      - MYSQL_DATABASE=combustible
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
     restart: always
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
-      interval: 3s
-      retries: 5
+      test: ["CMD", "mysqladmin", "ping", "--host=localhost"]
       start_period: 30s
+      interval: 10s
+      timeout: 10s
+      retries: 3
     secrets:
       - db-password
-    volumes:
-      - db-data:/var/lib/mysql
     networks:
-      - spring-mysql
+      - backend-to-db-network
     ports:
-      - "9000:3306"
-#   frontend:
-#     build:
-#       context: InterfaceProyecto
-#       target: development
-#     ports:
-#       - 3000:5173
-#     volumes:
-#       - ./frontend/src:/code/src
-#       - /project/node_modules
-#     networks:
-#       - react-spring
-#     depends_on:
-#       - backend
-#     expose:
-#       - 3306
-#       - 33060
+      - 9000:3306  
+    volumes:
+      - ./backend/scripts:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql
+
+  backend:
+    build:
+      context: Trabajo
+      target: run_in_dev
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      retries: 3
+      start_period: 30s
+      timeout: 5s
+    environment:
+      - SPRING_DB_CONNECTION_STRING=jdbc:mysql://db:3306/combustible  
+      - SPRING_DB_USERNAME=root
+      - SPRING_DB_PASSWORD=/run/secrets/db-password
+      - SPRING_CORS_URLS=http://localhost:5173
+    restart: always
+    secrets:
+      - db-password
+    ports:
+      - 8080:8080
+    networks:
+      - backend-to-db-network
+      - frontend-to-backend-network
+
+  frontend:
+    build:
+      context: InterfaceProyecto
+      target: run_in_dev
+    depends_on:
+      - backend
+    environment:
+      - VITE_BACKEND_URL=http://backend:8080/
+    networks:
+      - frontend-to-backend-network
+    ports:
+      - 5173:5173
+
+secrets:
+  db-password:
+    file: db/password.txt
+
+networks:
+  backend-to-db-network: {}
+  frontend-to-backend-network: {}
+
 volumes:
   db-data: {}
-secrets:
-  db-password: 
-    file : db/password.txt
-networks:
-  react-spring: {}
-  spring-mysql: {}
