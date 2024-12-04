@@ -1,40 +1,50 @@
-/* Estilos generales para pantallas grandes */
 .catalogo-container {
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
+    flex-wrap: wrap;
+    justify-content: center;
     box-sizing: border-box;
+    padding: 20px;
 }
 
 .revista-card {
     display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    justify-content: center; 
-    width: 300px; 
-    height: 300px; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
     margin: 20px;
-    padding: 10px;
-    border-radius: 20px; 
-    background: #3c3c3c; 
-    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3), 
+    padding: 15px; 
+    border-radius: 20px;
+    background: rgba(60, 60, 60, 0.6); 
+    backdrop-filter: blur(10px);
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.4), 
                 -8px -8px 15px rgba(255, 255, 255, 0.2);
-    transition: transform 0.2s; 
-    overflow: hidden; 
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    text-align: center;
 }
 
-/* Ajustes para pantallas entre 1024px y 1366px */
+.revista-card:hover {
+    transform: scale(1.05); 
+    background: rgba(80, 80, 80, 0.8); 
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5), 
+                -10px -10px 20px rgba(255, 255, 255, 0.3);
+}
+
+
 @media (max-width: 1366px) and (min-width: 1024px) {
     .revista-card {
-        width: 190px; /* Reducimos el tamaño */
-        height: 220px; 
+        width: 250px;
+        height: 250px;
     }
 }
 
-/* Ajustes para pantallas más pequeñas (768px o menos) */
+
 @media (max-width: 768px) {
     .revista-card {
-        width: 150px; 
-        height: 150px;
+        width: 180px;
+        height: 180px;
+        padding: 10px; 
     }
 }

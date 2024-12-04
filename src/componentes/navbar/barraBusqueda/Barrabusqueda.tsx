@@ -58,9 +58,9 @@ const Barrabusqueda: React.FC<BarrabusquedaProps> = ({ revistas }) => {
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Prevenir el comportamiento predeterminado
+            event.preventDefault(); 
             if (query.trim() !== '') {
-                filterRevistas(query); // Realizar la búsqueda si hay texto
+                filterRevistas(query); 
             }
         }
     };
@@ -73,28 +73,29 @@ const Barrabusqueda: React.FC<BarrabusquedaProps> = ({ revistas }) => {
                 placeholder="Buscar por título o autor..."
                 value={query}
                 onChange={handleInputChange}
-                onKeyDown={handleKeyDown} // Detectar "Enter" al escribir
+                onKeyDown={handleKeyDown} 
                 className="entrada_busqueda"
             />
-            {mostrarResultados && (
-                <div ref={resultadosRef} className="resultados">
-                    {filteredRevistas.length > 0 ? (
-                        filteredRevistas.map((revista) => (
-                            <div
-                                key={revista.id}
-                                className="resultados_items"
-                                onClick={() => handleRevistaClick(revista.id)}
-                            >
-                                <h3>{revista.titulo}</h3>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="no-resultados">
-                            <p>No se encontraron resultados.</p>
+            <div 
+                ref={resultadosRef} 
+                className={`resultados ${mostrarResultados ? 'visible' : ''}`}
+            >
+                {filteredRevistas.length > 0 ? (
+                    filteredRevistas.map((revista) => (
+                        <div
+                            key={revista.id}
+                            className="resultados_items"
+                            onClick={() => handleRevistaClick(revista.id)}
+                        >
+                            <h3>{revista.titulo}</h3>
                         </div>
-                    )}
-                </div>
-            )}
+                    ))
+                ) : (
+                    <div className="no-resultados">
+                        <p>No se encontraron resultados.</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

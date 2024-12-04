@@ -1,62 +1,55 @@
 .mis-reservas-container {
-    background-color: #171717;
-    border-radius: 25px;
     display: flex;
-    flex-direction: column; /* Coloca los elementos en columna */
-    align-items: center;    /* Centra el contenido horizontalmente */
-    gap: 20px; /* Espaciado entre el título y la cuadrícula */
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
     padding: 20px;
     box-sizing: border-box;
-    transition: 0.4s ease-in-out;
+    background-color: rgba(23, 23, 23, 0.8); 
+    border-radius: 20px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(255, 255, 255, 0.1);
 }
-.mis-reservas-container:hover {
-    transform: scale(1.05);
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5), -4px -4px 10px rgba(255, 255, 255, 0.2);
-}
+
 .mis-reservas-container h2 {
-    color: #ffffff; 
-    font-size: 24px; /* Tamaño del texto del título */
-    text-align: center; 
-    margin: 0; /* Elimina márgenes externos */
+    width: 100%;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2em;
 }
 
 .mis-reservas-revistas-grid {
     display: flex;
-    flex-wrap: nowrap; /* Mantiene los elementos en una fila */
-    gap: 10px; /* Espaciado entre tarjetas */
-    overflow-x: auto; /* Permite desplazamiento horizontal */
-    padding-top: 10px; /* Añade espacio entre el título y las imágenes */
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
 }
 
-/* Estilo de las tarjetas dentro de la cuadrícula */
-.mis-reservas-revistas-grid .revista-card {
-    flex: 0 0 auto; /* Evita el redimensionamiento automático */
-    width: 180px; 
-    height: 230px; 
-    border-radius: 20px; 
-    background: #3c3c3c;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 
-                -5px -5px 10px rgba(255, 255, 255, 0.2);
-    text-align: center;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column; /* Asegura que el contenido se apile verticalmente */
-    align-items: center;
-    justify-content: flex-end; /* Mantiene el título debajo de la imagen */
-}
-
-.mis-reservas-revistas-grid .revista-portada {
-    width: 140px; 
-    height: 140px; 
-    object-fit: cover; /* Ajusta la imagen al tamaño sin deformarla */
+.mis-reservas-revistas-card {
+    flex: 0 1 150px;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(60, 60, 60, 0.8); 
     border-radius: 10px;
-    margin-bottom: 10px; /* Espacio entre la imagen y el título */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    color: #fff;
+    backdrop-filter: blur(5px); 
 }
 
-.mis-reservas-revistas-grid .revista-titulo {
-    color: #ffffff; 
-    font-size: 16px; 
-    text-align: center; 
-    font-weight: bold; 
-    margin: 0; /* Asegura que no haya márgenes adicionales */
+.mis-reservas-revistas-card:hover {
+    transform: scale(1.05); 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4), -5px -5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.mis-reservas-revistas-card img {
+    width: 100%;
+    border-radius: 10px;
+    height: auto;
+    object-fit: cover;
+}
+
+.mis-reservas-revistas-card p {
+    margin-top: 10px;
+    font-size: 1em;
 }
