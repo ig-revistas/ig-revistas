@@ -72,7 +72,7 @@ const App: React.FC = () => {
                             }          
                         />
                          <Route path="/settings" element={<Settings />} />
-                         <Route path="/restablecer" element={<RestablecerContrasenia />} />
+                         <Route path="/restablecer-contrasenia" element={<RestablecerContrasenia />} />
                          <Route path="/solicitar-restauracion" element={<SolicitarRestauracion />} />
                     </Routes>
                 </div>
