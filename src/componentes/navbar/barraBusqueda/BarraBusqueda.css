@@ -1,0 +1,74 @@
+.barraBusqueda {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 3px auto;
+    padding: 10px;
+}
+
+.entrada_busqueda {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background-color: #3c3c3c;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2),
+                inset 1px 1px 5px rgba(255, 255, 255, 0.1),
+                inset -1px -1px 5px rgba(0, 0, 0, 0.2);
+    outline: none;
+    transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+}
+
+.entrada_busqueda:focus {
+    box-shadow: 0px 0px 10px rgba(0, 150, 255, 0.5);
+    transform: scale(1.02);
+    background-color: #4a4a4a;
+}
+
+.resultados {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 800px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    z-index: 1000;
+    max-height: 300px;
+    padding: 10px;
+    margin-top: 10px;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 0; /* Resultados inicialmente invisibles */
+}
+
+.resultados.visible {
+    opacity: 1; /* Resultados visibles cuando se muestran */
+}
+
+.resultados .resultado-item {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: #4a4a4a;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.resultados .resultado-item:hover {
+    background-color: #5a5a5a;
+}
+
+.resultados .no-resultados {
+    text-align: center;
+    color: #aaa;
+    font-size: 1.2rem;
+    padding: 15px;
+}

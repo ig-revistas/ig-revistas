@@ -1,0 +1,44 @@
+.menuGestionRevistaContainer {
+  background-color: rgba(36, 40, 50, 1);
+  position: absolute;
+  top: 100%; /* Coloca el menú debajo del botón */
+  left: -20px; /* Alineado a la izquierda del botón */
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  margin-top: 10px; /* Añade separación entre el botón y el menú */
+  width: max-content; /* Ajusta el ancho del menú a su contenido */
+  z-index: 1000; /* Asegura que el menú esté encima de otros elementos */
+}
+
+.menuGestionRevistaList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menuGestionRevistaItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: rgba(36, 40, 50, 1);
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.menuGestionRevistaItem:hover {
+  background-color: #5353ff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.menuGestionRevistaIcon {
+  width: 24px;
+  height: 24px;
+}
