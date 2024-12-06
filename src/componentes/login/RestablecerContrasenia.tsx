@@ -11,8 +11,9 @@ const RestablecerContrasenia = () => {
     const handleSubmit = async (e: React.FormEvent) => {  
         e.preventDefault();
         try {
-            const response: AxiosResponse<string> = await axios.post('/restablecer-contrasenia', { token, password });
+            const response = await axios.post<string>('/restablecer-contrasenia', { token, password });
             setMessage(response.data);
+
         } catch (error: any) {  
             setMessage(error.response?.data || 'Error al actualizar la contraseña.');
         }

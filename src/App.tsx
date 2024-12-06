@@ -15,6 +15,8 @@ import { AuthProvider } from "./context/authprovider";
 import './css/App.css';
 import ReservaComponent from './componentes/listaDeReserva/listaReservaOperador';
 import EditarRevistaForm from './componentes/revistaForm/EditarRevistaForm';
+import RestablecerContrasenia from './componentes/login/RestablecerContrasenia';
+import SolicitarRestauracion from './componentes/login/SolicitarRestablecimiento';
 
 const App: React.FC = () => {
     const { revistas, error, loading } = useRevistas();
@@ -70,6 +72,8 @@ const App: React.FC = () => {
                             }          
                         />
                          <Route path="/settings" element={<Settings />} />
+                         <Route path="/restablecer" element={<RestablecerContrasenia />} />
+                         <Route path="/solicitar-restauracion" element={<SolicitarRestauracion />} />
                     </Routes>
                 </div>
             </Router>
