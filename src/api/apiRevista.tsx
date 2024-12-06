@@ -14,6 +14,8 @@ apiRevista.interceptors.request.use(
             '/uploads',
             '/revistas/uploads',
             '/registrarse',
+            '/restablecer-contrasenia',  
+            '/solicitar-restablecimiento',
         ];
 
         if (accessToken && config.headers) {

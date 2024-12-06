@@ -50,7 +50,7 @@ const Reservas = () => {
                             </p>
                             {reserva.fechaAprobacion && (
                                 <p>
-                                    <strong>Fecha de Aprobación:</strong> {new Date(reserva.fechaAprobacion).toLocaleDateString()}
+                                    <strong>Fecha de Aprobacion:</strong> {new Date(reserva.fechaAprobacion).toLocaleDateString()}
                                 </p>
                             )}
                             {reserva.fechaRechazo && (

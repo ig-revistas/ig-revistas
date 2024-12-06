@@ -58,7 +58,9 @@ const Login = () => {
                             </Link>
                         </div>
 
-                        <button className="button3">Olvidé mi Contraseña</button>
+                        <Link to="/solicitar-restauracion">
+                        <button type="button" className="button3">Olvidé mi Contraseña</button>
+                        </Link>
                     </form>
                 </section>
             )}
