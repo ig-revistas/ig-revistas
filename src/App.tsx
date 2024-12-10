@@ -13,10 +13,11 @@ import PrivateRoute from './componentes/rutaPrivada/RutaPrivada';
 import Settings from './componentes/menuUsuario/settings/Settings';
 import { AuthProvider } from "./context/authprovider";
 import './css/App.css';
-import ReservaComponent from './componentes/listaDeReserva/listaReservaOperador';
+import ReservaComponent from './componentes/listaDeReserva/listaReservaPendiente';
 import EditarRevistaForm from './componentes/revistaForm/EditarRevistaForm';
 import RestablecerContrasenia from './componentes/login/RestablecerContrasenia';
 import SolicitarRestauracion from './componentes/login/SolicitarRestablecimiento';
+import ReporteRevistas from './componentes/ReporteRevsita/ReporteRevistas';
 
 const App: React.FC = () => {
     const { revistas, error, loading } = useRevistas();
@@ -67,7 +68,23 @@ const App: React.FC = () => {
                             path='/reservasPendientes'
                             element={
                                 <PrivateRoute rol="OPERADOR_ROLE">
-                                    <ReservaComponent />
+                                    <ReservaComponent tipo="pendiente"/>
+                                </PrivateRoute>
+                            }          
+                        />
+                        <Route 
+                            path='/reservasAprobadas'
+                            element={
+                                <PrivateRoute rol="OPERADOR_ROLE">
+                                    <ReservaComponent tipo="aprobada"/>
+                                </PrivateRoute>
+                            }          
+                        />
+                        <Route 
+                            path='/reporte-revistas'
+                            element={
+                                <PrivateRoute rol="OPERADOR_ROLE">
+                                    <ReporteRevistas />
                                 </PrivateRoute>
                             }          
                         />
