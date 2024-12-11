@@ -1,25 +1,24 @@
 import { useState } from "react";
-import apiRevista from "../../../api/apiRevista";
-import { EstadoReserva, tipoReserva } from "../../../tipos/Reserva";
+import apiRevista from "../../api/apiRevista";
+import {  tipoReserva } from "../../tipos/Reserva";
 
 
 //___________Url______________
 const RECERVA_URL = '/reserva'
 const TODAS_LAS_RESERVAS_URL = RECERVA_URL+'/todasLasPendientes';
-const USUARIO_URL ='/usuario/';
-const REVISTA_URL ='/revistas/';
 const RECHAZAR_RECERVA_URL= RECERVA_URL+'/rechazar'
 const APROBAR_RECERVA_URL= RECERVA_URL+'/aprobar'
 //____________________________
+/*
 export interface tipoReservaConDetalles{
     id: string;
     tiempoVigente: number | null;
-    fechaAprobacion: string | null;
-    fechaPedirReserva: string;
-    fechaRechazo: string | null;
+    fechaAprobacion: Date | null;
+    fechaPedirReserva: Date;
+    fechaRechazo: Date | null;
     estado: EstadoReserva;
     usuario: usuarioInfo,
-    revista: revistaInfo
+    revista: revistaInfo;
 }
 interface usuarioInfo{
     id:string,
@@ -28,25 +27,26 @@ interface usuarioInfo{
 interface revistaInfo{
     id: string,
     titulo: string,
+    estadoRevista: EstadoRevista,
 }
-
+*/
 
 const useReservaPendiente = () => {
     const [errMsg, setErrMsg] = useState<string>(''); 
-    const [reservas, setReservas] = useState<tipoReservaConDetalles[]>([]); 
+    const [reservas, setReservas] = useState<tipoReserva[]>([]); 
     const [cargando, setCargando] = useState<boolean>(false);
 
     const pedirTodasLasReservas = async () => {
         setCargando(true); 
         try {
             const response = await apiRevista.get<tipoReserva[]>(TODAS_LAS_RESERVAS_URL);
+
             if (response.status === 200 && response.data) {
-                const reservaConDetalles = await obtenerDetalles(response.data);
-                setReservas(reservaConDetalles);
+                //const reservaConDetalles = await obtenerDetalles(response.data);
+                setReservas(response.data);
             } else {
                 setErrMsg('Error al obtener reservas');
             }
-            
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Sin respuesta del servidor');
@@ -55,7 +55,7 @@ const useReservaPendiente = () => {
             setCargando(false); 
         }
     };
-
+/*
     const obtenerDetalles=async(reservas: tipoReserva[])=>{
         try{
             const obtenerDetalles = await Promise.all(reservas.map(async(reserva) =>{
@@ -64,14 +64,7 @@ const useReservaPendiente = () => {
                         'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     }
                 })
-                console.log(usuarioResponce.data)
-                const revistaResponce = await apiRevista.get<revistaInfo>(`${REVISTA_URL}${reserva.revista}`,{
-                    headers:{
-                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                    }
-                })
-                console.log("id revista: "+revistaResponce.data.id)
-                console.log("id usuario: "+usuarioResponce.data.id)
+                
                 return{
                     id:reserva.id,
                     tiempoVigente: reserva.tiempoVigente,
@@ -84,8 +77,9 @@ const useReservaPendiente = () => {
                         email:usuarioResponce.data.email,
                     },
                     revista:{
-                        id:revistaResponce.data.id,
-                        titulo:revistaResponce.data.titulo,
+                        id:reserva.revista.id,
+                        titulo:reserva.revista.titulo,
+                        estadoRevista:reserva.revista.estado,
                     },
                 }
             }))
@@ -95,9 +89,10 @@ const useReservaPendiente = () => {
             return [];
         }
     }
-    const aprobarRecerva=async(id_recerba: string, tiempoVigente: number )=>{
+*/
+    const aprobarReserva=async(idRecerba: string, tiempoVigente: number )=>{
         try{
-        const aprobarResponce = await apiRevista.put(`${APROBAR_RECERVA_URL}/${id_recerba}/${tiempoVigente}`,{
+        const aprobarResponce = await apiRevista.put(`${APROBAR_RECERVA_URL}/${idRecerba}/${tiempoVigente}`,{
             headers:{
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
             }
@@ -114,7 +109,7 @@ const useReservaPendiente = () => {
     }
 
     }
-    const rechazarRecerva=async(id_Recerva: string)=>{
+    const rechazarReserva=async(id_Recerva: string)=>{
 
         try{
             const rechazarResponce = await apiRevista.put(`${RECHAZAR_RECERVA_URL}/${id_Recerva}`,{
@@ -132,7 +127,7 @@ const useReservaPendiente = () => {
             console.error("Error al rechazar la reserva: ", err)
         }
     }
-    return { errMsg, reservas, pedirTodasLasReservas, cargando ,aprobarRecerva, rechazarRecerva};
+    return { errMsg, reservas, pedirTodasLasReservas, cargando ,aprobarReserva, rechazarReserva};
 };
 
 export default useReservaPendiente;

@@ -1,4 +1,6 @@
 export interface Revista {
+    updatedData(id: string, updatedData: any): void;
+
     id: string;
     titulo: string;
     autor: string;
@@ -6,13 +8,14 @@ export interface Revista {
     editorial: string;
     descripcion: string; 
     portadaUrl: string;
-    estado: Estado.DISPONIBLE;
-    fechaDePublicacion: string;
-    ejemplares: number;
+    estado: Estado;  
+    fechaPublicacion: string;
+    cantidadDisponible: number;
 }
+
 export enum Estado {
-    DISPONIBLE = 'DISPONIBLE',
-    PRESTADA = 'PRESTADA',
-    RESERVADA = 'RESERVADA',
-    DEVUELTA = 'DEVUELTA'
+    DISPONIBLE,
+    PRESTADA,
+    DEVUELTA,
+    SUSPENDIDA
 }

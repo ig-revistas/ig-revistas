@@ -1,0 +1,65 @@
+
+.settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #171717; 
+    border-radius: 25px; 
+    color: #ffffff; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    transition: transform 0.4s ease-in-out;
+}
+
+.settings-container:hover {
+    transform: scale(1.05); 
+    border: 1px solid #4b4b4b; 
+}
+
+.settings-container h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.settings-options {
+    list-style: none;
+    padding: 0;
+}
+
+.settings-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #3a3a3a; 
+    border: 1px solid #4b4b4b; 
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.settings-item:hover {
+    background-color: #5a5a5a; 
+    transform: scale(1.02); 
+}
+
+.settings-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    color: #007bff; 
+}
+
+.settings-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: #dcdcdc; 
+}
+
+.settings-message {
+    font-size: 1rem;
+    color: #ff6347; 
+    margin-top: 20px;
+    text-align: center;
+}

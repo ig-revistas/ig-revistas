@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/authprovider';
 import Barrabusqueda from './barraBusqueda/Barrabusqueda';
 import BurbujaDeUsuario from './BurbujaDeUsuario/BurbujaDeUsuario';
@@ -14,19 +14,14 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
     const authContext = useContext(AuthContext);
-    const isLoggedIn = authContext?.auth.isLoggedIn;
+    const navigate = useNavigate();
 
     const [menuUsuarioVisible, setMenuUsuarioVisible] = useState(false);
-    const usuarioMenuRef = useRef<HTMLLIElement>(null); 
+    const usuarioMenuRef = useRef<HTMLLIElement>(null);
 
-    const isAdmin = () => {
-        const rol = authContext?.auth.user?.roles;
-        return rol?.includes('ADMIN_ROLE');
-    };
-    const isOperador = () => {
-        const rol = authContext?.auth.user?.roles;
-        return rol?.includes('OPERADOR_ROLE');
-    };
+    const isAdmin = () => authContext?.auth.user?.roles?.includes('ADMIN_ROLE');
+    const isUser = () => authContext?.auth.user?.roles?.includes('USER_ROLE');
+
     const toggleMenuUsuario = () => {
         setMenuUsuarioVisible(!menuUsuarioVisible);
     };
@@ -40,6 +35,10 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
         }
     };
 
+    const handleRevistasReservadas = () => {
+        navigate('/revistas-reservadas');
+    };
+
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => {
@@ -51,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
         <nav className="navbar">
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Catálogo</Link>
                 </li>
 
                 {isAdmin() && (
@@ -59,31 +58,49 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
                         <BotonGestionRevista />
                     </li>
                 )}
-                {isOperador() && (
+                {isUser() && (
                     <li>
-                        <Link to="/reservasPendientes">Pendiente</Link>
+                        <button
+                            className="boton-revistas-reservadas"
+                            onClick={handleRevistasReservadas}
+                        >
+                            Mis Revistas
+                        </button>
                     </li>
                 )}
-
-                
             </ul>
 
             <Barrabusqueda revistas={revistas} />
 
             <ul>
-                {!isLoggedIn ? (
+                {!authContext?.auth.isLoggedIn ? (
                     <li>
                         <Link className="registro" to="/Login">
-                            Iniciar Sesion
+                            Iniciar Sesión
                         </Link>
                     </li>
                 ) : (
                     <li
                         onClick={toggleMenuUsuario}
-                        ref={usuarioMenuRef} 
+                        ref={usuarioMenuRef}
                         className="usuario-icono"
                     >
-                        <BurbujaDeUsuario />
+                        {authContext?.auth.user?.portadaUrl ? (
+                            <>
+                                <img
+                                    src={`http://localhost:8080${authContext.auth.user.portadaUrl}`}
+                                    alt={`Foto de perfil de ${authContext.auth.user.name || 'Usuario'}`}
+                                    className="perfil-avatar"
+                                    onError={(e) => {
+                                        console.error('Error al cargar imagen:', e.currentTarget.src);
+                                        e.currentTarget.src = '/default.png';
+                                    }}
+                                />
+                                <span>{authContext.auth.user.name}</span>
+                            </>
+                        ) : (
+                            <BurbujaDeUsuario />
+                        )}
                         {menuUsuarioVisible && (
                             <div className="menu-container">
                                 <MenuUsuario />
@@ -95,5 +112,4 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
         </nav>
     );
 };
-
 export default Navbar;

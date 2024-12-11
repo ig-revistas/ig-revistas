@@ -1,7 +1,10 @@
 @import './Variables.css';
 
+
+a{
+    color: antiquewhite;
+}
 * {
-    
     background: none;
     border: none;
     outline: none;
@@ -13,7 +16,8 @@ html {
     color: var(--text-color-white);
 }
 body {
-    background-color: var(--background-main);
+    background-image: url('https://media1.tenor.com/m/-ks8-pPuX4sAAAAC/megamind-oh.gif'); 
+    background-size: cover; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +25,8 @@ body {
     flex-direction: row;
     align-content: flex-start;
     flex-wrap: nowrap;
+    z-index: -1;
+
 }
 h1 {
     color: var(--text-color-white);

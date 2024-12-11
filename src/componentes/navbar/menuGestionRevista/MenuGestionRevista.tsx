@@ -7,50 +7,67 @@ const MenuGestionRevista: React.FC = () => {
 
   const handleNuevaRevista = () => navigate('/new_revista');
   const handleListaRevistas = () => navigate('/revistas');
+  const handlePendientes = () => navigate('/reservasPendientes'); // Lógica de "Pendiente"
 
   return (
-    <div className="menu-gestion-revista">
-      <ul className="menu-gestion-revista-list">
-        <li className="menu-gestion-revista-item" onClick={handleNuevaRevista}>
+    <div className="menuGestionRevistaContainer">
+      <ul className="menuGestionRevistaList">
+        <li className="menuGestionRevistaItem" onClick={handleNuevaRevista}>
           <svg
-            className="lucide lucide-plus-circle"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            strokeWidth="2"
-            stroke="#7e8590"
-            fill="none"
-            viewBox="0 0 24 24"
-            height="24"
-            width="24"
+            className="menuGestionRevistaIcon"
             xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="16" />
-            <line x1="8" y1="12" x2="16" y2="12" />
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
           </svg>
-          <p className="menu-gestion-revista-label">Nueva Revista</p>
+          <p>Nueva Revista</p>
         </li>
-        <li className="menu-gestion-revista-item" onClick={handleListaRevistas}>
+        <li className="menuGestionRevistaItem" onClick={handleListaRevistas}>
           <svg
-            className="lucide lucide-list"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            strokeWidth="2"
-            stroke="#7e8590"
-            fill="none"
-            viewBox="0 0 24 24"
-            height="24"
-            width="24"
+            className="menuGestionRevistaIcon"
             xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <line x1="8" y1="6" x2="21" y2="6" />
-            <line x1="8" y1="12" x2="21" y2="12" />
-            <line x1="8" y1="18" x2="21" y2="18" />
-            <line x1="3" y1="6" x2="3.01" y2="6" />
-            <line x1="3" y1="12" x2="3.01" y2="12" />
-            <line x1="3" y1="18" x2="3.01" y2="18" />
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
           </svg>
-          <p className="menu-gestion-revista-label">Lista de Revistas</p>
+          <p>Lista de Revistas</p>
+        </li>
+        <li className="menuGestionRevistaItem" onClick={handlePendientes}>
+          <svg
+            className="menuGestionRevistaIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <p>Reservas-Pendiente</p>
         </li>
       </ul>
     </div>
