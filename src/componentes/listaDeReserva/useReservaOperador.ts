@@ -9,27 +9,7 @@ const TODAS_LAS_RESERVAS_URL = RECERVA_URL+'/todasLasPendientes';
 const RECHAZAR_RECERVA_URL= RECERVA_URL+'/rechazar'
 const APROBAR_RECERVA_URL= RECERVA_URL+'/aprobar'
 //____________________________
-/*
-export interface tipoReservaConDetalles{
-    id: string;
-    tiempoVigente: number | null;
-    fechaAprobacion: Date | null;
-    fechaPedirReserva: Date;
-    fechaRechazo: Date | null;
-    estado: EstadoReserva;
-    usuario: usuarioInfo,
-    revista: revistaInfo;
-}
-interface usuarioInfo{
-    id:string,
-    email: string,
-}
-interface revistaInfo{
-    id: string,
-    titulo: string,
-    estadoRevista: EstadoRevista,
-}
-*/
+
 
 const useReservaPendiente = () => {
     const [errMsg, setErrMsg] = useState<string>(''); 
@@ -42,7 +22,7 @@ const useReservaPendiente = () => {
             const response = await apiRevista.get<tipoReserva[]>(TODAS_LAS_RESERVAS_URL);
 
             if (response.status === 200 && response.data) {
-                //const reservaConDetalles = await obtenerDetalles(response.data);
+               
                 setReservas(response.data);
             } else {
                 setErrMsg('Error al obtener reservas');
@@ -55,41 +35,7 @@ const useReservaPendiente = () => {
             setCargando(false); 
         }
     };
-/*
-    const obtenerDetalles=async(reservas: tipoReserva[])=>{
-        try{
-            const obtenerDetalles = await Promise.all(reservas.map(async(reserva) =>{
-                const usuarioResponce = await apiRevista.get<usuarioInfo>(`${USUARIO_URL}${reserva.usuario}`,{
-                    headers:{
-                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                    }
-                })
-                
-                return{
-                    id:reserva.id,
-                    tiempoVigente: reserva.tiempoVigente,
-                    fechaAprobacion: reserva.fechaAprobacion,
-                    fechaPedirReserva: reserva.fechaPedirReserva,
-                    fechaRechazo: reserva.fechaRechazo,
-                    estado: reserva.estado,
-                    usuario:{
-                        id:usuarioResponce.data.id,
-                        email:usuarioResponce.data.email,
-                    },
-                    revista:{
-                        id:reserva.revista.id,
-                        titulo:reserva.revista.titulo,
-                        estadoRevista:reserva.revista.estado,
-                    },
-                }
-            }))
-            return obtenerDetalles;
-        }catch (err: any) {
-            setErrMsg('Error al obtener detalles de reservas');
-            return [];
-        }
-    }
-*/
+
     const aprobarReserva=async(idRecerba: string, tiempoVigente: number )=>{
         try{
         const aprobarResponce = await apiRevista.put(`${APROBAR_RECERVA_URL}/${idRecerba}/${tiempoVigente}`,{
