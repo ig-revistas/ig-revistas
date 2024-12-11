@@ -1,0 +1,74 @@
+[
+    {
+        "id": "42833588-8fbc-416c-befe-c92cc1e5e874",
+        "titulo": "Conjunto de instrucciones bien moduladas en red",
+        "autor": "Efraín Vidal Torre",
+        "fechaPublicacion": "2021-01-07",
+        "categoria": "Historia",
+        "editorial": "Mateos-Tapia",
+        "estado": "DISPONIBLE",
+        "cantidadDisponible": 15,
+        "descripcion": "Elegir grandes cosas sin dolor. La voluptuosidad rechaza los tiempos en los que uno debe cumplir. Explicando las cosas que odia la dignidad de sí misma. Se elimina las molestias y rechaza el id.",
+        "portadaUrl": "/uploads/primera revista.png"
+    },
+    {
+        "id": "544d745a-582e-491a-844c-fd03e92a8463",
+        "titulo": "Crónicas del Tiempo: Explorando el Pasado",
+        "autor": "Equipo de Historia y Cultura",
+        "fechaPublicacion": "2024-12-06",
+        "categoria": "Historia",
+        "editorial": "Herencia Editorial",
+        "estado": "DISPONIBLE",
+        "cantidadDisponible": 148,
+        "descripcion": "Sumérgete en las maravillas del pasado con 'Crónicas del Tiempo', una revista que explora los hitos históricos más importantes, civilizaciones antiguas y su legado cultural.",
+        "portadaUrl": "/uploads/DALL·E 2024-12-06 13.19.32 - A detailed and elegant magazine cover about history, featuring iconic landmarks like ancient ruins, old manuscripts, and a clock symbolizing time. The.jpg"
+    },
+    {
+        "id": "8c8f69a9-7972-419d-b2ee-c71cdadddfbc",
+        "titulo": "Evolución Creativa: Innovaciones del Futuro",
+        "autor": "Equipo Editorial EVIFON",
+        "fechaPublicacion": "2024-12-06",
+        "categoria": "Tecnología",
+        "editorial": "Futura Ediciones",
+        "estado": "DISPONIBLE",
+        "cantidadDisponible": 100,
+        "descripcion": "Una revista vibrante que explora los avances más emocionantes en tecnología, arte y ciencia. Desde gadgets futuristas hasta diseños innovadores, este número está dedicado a inspirar creatividad y asom",
+        "portadaUrl": "/uploads/Diseño sin título (3).png"
+    },
+    {
+        "id": "93eabcf1-5b2a-4905-9208-2bd9ecee06a0",
+        "titulo": "Ciencia Natural: Conexiones con la Vida",
+        "autor": "Equipo de Ciencias Naturales",
+        "fechaPublicacion": "2018-12-06",
+        "categoria": "Ciencia",
+        "editorial": "EcoMundo Ediciones",
+        "estado": "DISPONIBLE",
+        "cantidadDisponible": 30,
+        "descripcion": "Descubre la belleza y complejidad de nuestro mundo natural con 'Ciencia Natural'. Este número explora ecosistemas vibrantes, avances en biología y la relación entre ciencia y conservación. Ideal para ",
+        "portadaUrl": "/uploads/DALL·E 2024-12-06 13.21.20 - A vibrant magazine cover about natural sciences, featuring a lush forest scene with various plants, animals, and scientific equipment like a microscop.jpg"
+    },
+    {
+        "id": "c251f62b-8738-481b-83be-b8d8f9cf699b",
+        "titulo": "Paralelismo robusto neutral",
+        "autor": "IváHerranz, Manrique y Espejon Artemio Plaza Molins",
+        "fechaPublicacion": "2018-02-24",
+        "categoria": "Ciencia",
+        "editorial": "Herranz, Manrique y Espejo",
+        "estado": "DISPONIBLE",
+        "cantidadDisponible": 9,
+        "descripcion": "Todo nuestro trabajo. Corrupción perspectiva contenida mínima.A menudo ocupa dolor. Máxima parte resistente con puntos destacados sobre peculiares puntos.",
+        "portadaUrl": "/uploads/Diseño sin título (1).png"
+    },
+    {
+        "id": "cf9fe598-0b46-4e00-9dbe-6b017a8f6906",
+        "titulo": "Conjunto de herramientas monitoreadas",
+        "autor": "Teófilo Gilabert Arrieta",
+        "fechaPublicacion": "2018-02-19",
+        "categoria": "Entretenimiento",
+        "editorial": "Benavent, Amor and Casanova",
+        "estado": "DISPONIBLE",
+        "cantidadDisponible": 1,
+        "descripcion": "General proactiva",
+        "portadaUrl": "/uploads/Diseño sin título (2).png"
+    }
+]

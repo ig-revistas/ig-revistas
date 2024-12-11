@@ -19,7 +19,9 @@ const DetalleRevista: React.FC<DetalleRevistaProps> = ({ revistas }) => {
     return (
         <div className="detalleRevista">
             <h2>{revista.titulo}</h2>
+            <h4>{revista.fechaDePublicacion}</h4>
             <h4>{revista.autor}</h4>
+           
             <img
                 src={`http://localhost:8080/revistas${revista.portadaUrl}`}
                 alt={revista.titulo}
