@@ -38,9 +38,7 @@ const RutaPrivada: React.FC<RutaPrivadaProps> = ({children:children,  rol }) => 
             {hasAccess() ? (
                 children  
             ) : (
-             /*
-              TODO : HAcer mensaje de avido "no tenes permiso, logiate."
-              */
+             
               <Navigate to="/login" />
             )}
         </>
