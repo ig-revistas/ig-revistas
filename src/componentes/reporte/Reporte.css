@@ -1,0 +1,38 @@
+.reporte-contenedor {
+    display: flex;
+    gap: 20px; 
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5), -4px -4px 10px rgba(255, 255, 255, 0.1);
+    background-color: rgba(23, 23, 23, 0.7); 
+    border-radius: 25px;
+    padding: 20px;
+    flex-direction: column; 
+  }
+  .circulo{
+    padding: 100px;
+    width: 100px;
+    height: 100px;
+    border: 4px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .circulo-revista-totales {
+    color: #ff4800; 
+    
+  }
+  .circulo-reservas-totales {
+    color: #007bff; 
+  }
+  .texto{
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+  }
+ 
+  

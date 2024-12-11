@@ -16,6 +16,7 @@ apiRevista.interceptors.request.use(
             '/registrarse',
             '/restablecer-contrasenia',  
             '/solicitar-restablecimiento',
+            '/sistema/reporte'
         ];
 
         if (accessToken && config.headers) {

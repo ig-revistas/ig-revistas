@@ -71,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({ revistas }) => {
             </ul>
 
             <Barrabusqueda revistas={revistas} />
-
+              
             <ul>
                 {!authContext?.auth.isLoggedIn ? (
                     <li>
