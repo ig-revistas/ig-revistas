@@ -92,7 +92,8 @@
   }
   
   .listado-reserva__boton--aprobar,
-  .listado-reserva__boton--rechazar {
+  .listado-reserva__boton--rechazar,
+  .listado-reserva__boton--devolver {
     width: 150px;
     height: 50px;
     cursor: pointer;
@@ -120,5 +121,13 @@
   
   .listado-reserva__boton--rechazar:hover {
     background-color: #c53131;
+  }
+
+  .listado-reserva__boton--devolver {
+    background-color: #ffea49;
+  }
+  
+  .listado-reserva__boton--devolver:hover {
+    background-color: #ffea49;
   }
   

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import apiRevista from "../../api/apiRevista";
-import {  tipoReserva } from "../../tipos/Reserva";
+import apiRevista from "../api/apiRevista";
+import {  tipoReserva } from "../tipos/Reserva";
 
 
 //___________Url______________

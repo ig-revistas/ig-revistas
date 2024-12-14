@@ -1,18 +1,22 @@
 import  { useEffect } from "react";
-import useReservaPendiente from "./useReservaPendiente";
+import useReservaPendiente from "../../hooks/useReservaPendiente";
 import Swal from 'sweetalert2';
 import "./listaReservaOperador.css"
 
-interface ReservaComponentProps {
-    tipo: 'pendiente' | 'aprobada'; 
-}
 
-const ReservaComponent: React.FC<ReservaComponentProps> = ({ tipo }) => {
-    const { pedirTodasLasReservas, aprobarReserva, rechazarReserva, errMsg, reservas, cargando } = useReservaPendiente();
+
+
+const ReservaPendienteComponent = () => {
+    const { pedirTodasLasReservas,
+            aprobarReserva,
+            rechazarReserva, 
+            errMsg, 
+            reservas,
+            cargando } = useReservaPendiente();
 
     useEffect(() => {
         pedirTodasLasReservas();
-    }, [tipo]); 
+    }, []); 
     const cartelDeExito=(estado: string)=>{
         Swal.fire("Éxito", "Reserva "+estado+" exitosamente.", "success");
     }
@@ -69,55 +73,56 @@ const ReservaComponent: React.FC<ReservaComponentProps> = ({ tipo }) => {
             pedirTodasLasReservas();
             })
     }
-
     return (
         
         <div className="listado-reserva__contenedor">
-        <div className="listado-reserva__header">
-            <h1>Lista de reservas {tipo === 'pendiente' ? 'Pendientes' : 'Aprobadas'}</h1>
-            {cargando && <p>Cargando...</p>}
-            {errMsg && <p className="error">{errMsg}</p>}
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Revista</th>
-                    <th>Estado de la Revista</th>
-                    <th>Fecha de la petición</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                {reservas && reservas.map((reserva) => {
-                    return (
-                        <tr key={reserva.id}>
-                            <td>{reserva.mailUsuario}</td>
-                            <td>{reserva.tituloRevista}</td>
-                            <td>{reserva.estadoRevista}</td>
-                            <td>{reserva.fechaPedirReserva.toString()}</td>
-                            <td>{reserva.estado}</td>
-                            <td>
-                                {tipo === 'pendiente' && (
+            <div className="listado-reserva__header">
+                <h1>Lista de reservas Pendientes</h1>
+                {cargando && <p>Cargando...</p>} 
+                {errMsg && <p className="error">{errMsg}</p>} 
+            </div>
+            <div className="listado-reserva__tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Revista</th>
+                        <th>Estado de la Revista</th>
+                        <th>Fecha de la petición</th>
+                        <th>Estado</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {reservas && reservas.map((reserva) => {
+                        console.log("Reserva: ", reserva); 
+                        return ( 
+                            <tr key={reserva.id}>
+                                <td>{reserva.mailUsuario}</td>
+                                <td>{reserva.tituloRevista}</td>
+                                <td>{reserva.estadoRevista}</td>
+                                <td>{reserva.fechaPedirReserva.toString()}</td>
+                                <td>{reserva.estado}</td>
+                                
+                                <td>
                                     <button onClick={() => manejarAprobarReserva(reserva.id, reserva.mailUsuario)} className="listado-reserva__boton--aprobar">
                                         Aprobar
                                     </button>
-                                )}
-                            </td>
-                            <td>
-                                {tipo === 'pendiente' && (
+                                </td>
+                                <td>
                                     <button onClick={() => manejarRechazarReserva(reserva.id, reserva.mailUsuario)} className="listado-reserva__boton--rechazar">
                                         Rechazar
                                     </button>
-                                )}
-                            </td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
-    </div>
-);}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    );
+};
 
-
-export default ReservaComponent;
+export default ReservaPendienteComponent;
