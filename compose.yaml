@@ -1,11 +1,13 @@
 services:
   backend:   
-    build: Trabajo 
+    build: ./ig-revistas-backend
     restart: always
     secrets:
       - db-password
     environment:
-      MYSQL_HOST: db
+      - SPRING_DB_CONNECTION_STRING=jdbc:mysql://db:3306/revistas  
+      - SPRING_DB_USERNAME=root
+      - SPRING_DB_PASSWORD=/run/secrets/db-password
     networks:
       - react-spring
       - spring-mysql
@@ -15,9 +17,7 @@ services:
     ports:
       - "9090:8080"
   db:
-    
     image: mysql:latest
-    
     environment:
       - MYSQL_DATABASE=revistas
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
@@ -35,22 +35,22 @@ services:
       - spring-mysql
     ports:
       - "9000:3306"
-#   frontend:
-#     build:
-#       context: InterfaceProyecto
-#       target: development
-#     ports:
-#       - 3000:5173
-#     volumes:
-#       - ./frontend/src:/code/src
-#       - /project/node_modules
-#     networks:
-#       - react-spring
-#     depends_on:
-#       - backend
-#     expose:
-#       - 3306
-#       - 33060
+  frontend:
+     build:
+       context: ./ig-revistas
+       target: run_in_dev
+     ports:
+       - 3000:5173
+     volumes:
+       - ./ig-revistas/src:/code/src
+     networks:
+       - react-spring
+     depends_on:
+       - backend
+     environment:
+       - VITE_BACKEND_URL=http://backend:8080
+     expose:
+       - 5173
 volumes:
   db-data: {}
 secrets:
